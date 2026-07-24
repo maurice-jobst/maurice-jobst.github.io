@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Turning a banking act into engineering specifications — Maurice Jobst</title>
+<meta name="description" content="How the German Banking Act became deterministic engineering specifications for audit-ready core banking on GCP under BaFin scrutiny, and why the same translation job is arriving again with PSD3 and the Payment Services Regulation.">
+<link rel="canonical" href="https://maurice-jobst.github.io/case-studies/banking-act-to-specifications.html">
+<meta name="author" content="Maurice Jobst">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Turning a banking act into engineering specifications — Maurice Jobst">
+<meta property="og:description" content="How the German Banking Act became deterministic engineering specifications for audit-ready core banking on GCP under BaFin scrutiny, and why the same translation job is arriving again with PSD3 and the Payment Services Regulation.">
+<meta property="og:url" content="https://maurice-jobst.github.io/case-studies/banking-act-to-specifications.html">
+<meta property="og:image" content="https://maurice-jobst.github.io/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d1117">
+<link rel="stylesheet" href="../assets/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://maurice-jobst.github.io/case-studies/banking-act-to-specifications.html#article",
+      "headline": "Turning a banking act into engineering specifications",
+      "description": "How the German Banking Act became deterministic engineering specifications for audit-ready core banking on GCP under BaFin scrutiny, and why the same translation job is arriving again with PSD3 and the Payment Services Regulation.",
+      "keywords": [
+        "KWG",
+        "BaFin",
+        "core banking",
+        "Google Cloud Platform",
+        "PSD3",
+        "Payment Services Regulation",
+        "Verification of Payee",
+        "regulated cloud",
+        "payments"
+      ],
+      "url": "https://maurice-jobst.github.io/case-studies/banking-act-to-specifications.html",
+      "mainEntityOfPage": "https://maurice-jobst.github.io/case-studies/banking-act-to-specifications.html",
+      "inLanguage": "en",
+      "datePublished": "2026-07-24",
+      "dateModified": "2026-07-24",
+      "author": {
+        "@id": "https://maurice-jobst.github.io/#person"
+      },
+      "publisher": {
+        "@id": "https://maurice-jobst.github.io/#person"
+      },
+      "about": {
+        "@id": "https://maurice-jobst.github.io/#person"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://maurice-jobst.github.io/#person",
+      "name": "Maurice Jobst",
+      "givenName": "Maurice",
+      "familyName": "Jobst",
+      "jobTitle": "Senior Product Manager",
+      "description": "I am Maurice Jobst, a Senior Product & Program Leader in Frankfurt am Main, working on European payment sovereignty (EPI) at Cubic Transportation Systems. I have spent 15+ years in payments, fintech, cybersecurity and public-sector mobility, with regulated delivery under BaFin, DORA, MaRisk/BAIT and the EU AI Act across the last decade of it. I owned a company's whole product function at Oddspedia, and more recently led 20+ people across vendors and partner organizations through Germany's Deutschland-Ticket rollout, inside a €5M+ B2G portfolio.",
+      "url": "https://maurice-jobst.github.io/",
+      "mainEntityOfPage": "https://maurice-jobst.github.io/",
+      "email": "mailto:maurice.jobst@gmail.com",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Cubic Transportation Systems",
+        "url": "https://www.cubic.com/transportation"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Frankfurt am Main",
+        "addressRegion": "Hessen",
+        "addressCountry": "DE"
+      },
+      "knowsLanguage": [
+        "German",
+        "English"
+      ],
+      "knowsAbout": [
+        "European Payments Initiative (EPI)",
+        "Wero",
+        "PSD2",
+        "PSD3",
+        "Payment Services Regulation (PSR)",
+        "Instant Payments Regulation",
+        "Verification of Payee",
+        "digital euro",
+        "SEPA",
+        "account-centric transit ticketing",
+        "DORA (Digital Operational Resilience Act)",
+        "MaRisk",
+        "BAIT",
+        "BaFin supervision",
+        "KWG",
+        "MiFID II",
+        "EU AI Act",
+        "Article 14 human oversight",
+        "ISO/IEC 42001",
+        "AI governance",
+        "KRITIS",
+        "NIS2",
+        "product management",
+        "program management",
+        "people leadership",
+        "vendor and partner governance",
+        "core banking",
+        "public-sector mobility",
+        "regulated cloud delivery",
+        "GitOps",
+        "Infrastructure as Code"
+      ],
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Dublin Business School"
+      },
+      "hasCredential": [
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Professional Scrum Product Owner II (PSPO II)"
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Professional Scrum Master I (PSM I)"
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Part-time lecturer in e-commerce and online payments, Dublin Business School"
+        }
+      ],
+      "seeks": {
+        "@type": "Demand",
+        "name": "Principal-level product and leadership mandates where payments and AI governance meet regulated delivery: Head of Product, practice build-out, consulting engagement leadership."
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/mauricejobst/",
+        "https://github.com/maurice-jobst"
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<main id="main">
+<p class="breadcrumb"><a href="../index.html">Maurice Jobst</a> / Case study</p>
+<h1>Turning a banking act into engineering specifications</h1>
+<p><em>Velvon Bank, 2019–2020 · Product Manager, Munich. Core banking on Google Cloud Platform, under BaFin scrutiny, for a German banking-license acquisition.</em> <em>Client and deal specifics are confidential. Everything below stays at architecture level, every fact is on my resume, and the fuller version is available in conversation.</em></p>
+<h2 id="the-situation"><span class="hash">#</span>The situation<a class="anchor" href="#the-situation" aria-label="Link to this section">#</a></h2>
+<p>A startup was acquiring a German banking license. That means building core banking infrastructure that the Bundesanstalt für Finanzdienstleistungsaufsicht will examine, on a cloud platform, at a pace set by the deal rather than by the engineering.</p>
+<p>Two clocks ran against each other. The delivery clock wanted weekly releases and a team that could change its mind. The supervisory clock wanted a system whose behaviour you could describe in advance, evidence after the fact, and defend to an examiner who had never met the team.</p>
+<h2 id="why-a-legal-text-is-not-a-specification"><span class="hash">#</span>Why a legal text is not a specification<a class="anchor" href="#why-a-legal-text-is-not-a-specification" aria-label="Link to this section">#</a></h2>
+<p>The Kreditwesengesetz tells you what a credit institution must be true of. It does not tell an engineer what to build. Between the two sits the work almost nobody staffs properly, and it is the work that decides whether the audit goes well.</p>
+<p>Take one requirement. The law wants client funds separated from the institution's own. An engineer reading that sentence has questions the sentence does not answer. Separated at which layer, the ledger or the account? A transfer landing mid-reconciliation goes where? Which failure modes must be impossible rather than unlikely, and which of those does the platform underneath you guarantee?</p>
+<p>Leave those open and each engineer resolves them differently. Six months later the system works, nobody can say precisely how, and the examiner asks the one question that was never decided.</p>
+<h2 id="what-i-did"><span class="hash">#</span>What I did<a class="anchor" href="#what-i-did" aria-label="Link to this section">#</a></h2>
+<ul>
+<li><strong>Translated KWG requirements into deterministic engineering specifications.</strong> Each obligation became a stated system property with its own acceptance criteria, written so a developer could build against it and an auditor could test it. Same sentence, both readers.</li>
+<li><strong>Mapped ledger and transaction-isolation boundaries</strong> for the core banking infrastructure on GCP. Where the cloud platform's own guarantees stopped, the specification said so and named what the application had to do instead. Assumed guarantees are how regulated cloud programs fail their first audit.</li>
+<li><strong>Held the line between startup speed and supervisory expectation</strong> rather than picking a side. The team kept its release cadence. The properties that carried regulatory weight moved to a slower, evidenced track with a named owner.</li>
+</ul>
+<h2 id="the-method"><span class="hash">#</span>The method<a class="anchor" href="#the-method" aria-label="Link to this section">#</a></h2>
+<p>Three rules, and they have survived every regulated program I have run since.</p>
+<p><strong>Turn every obligation into a testable property.</strong> "Client funds are segregated" is a claim. "No settlement path can move client funds into an own-account ledger, enforced at the ledger boundary and covered by test X" is a property. Auditors accept properties. They argue with claims.</p>
+<p><strong>Decide the ambiguity in writing, once.</strong> Every legal text has gaps that engineers must fill. Fill them yourself, in the specification, with the reasoning attached. Otherwise the gap is filled anyway, silently, differently, by whoever hits it first at 17:00 on a Friday.</p>
+<p><strong>Name the boundary where your platform's guarantees end.</strong> Regulated cloud work lives or dies on this. Write down what the provider guarantees, what it does not, and what your application does about the difference.</p>
+<h2 id="what-this-case-study-cannot-show-you"><span class="hash">#</span>What this case study cannot show you<a class="anchor" href="#what-this-case-study-cannot-show-you" aria-label="Link to this section">#</a></h2>
+<p>No star rating, no renewal figure. The <a href="deutschland-ticket-turnaround.html">Deutschland-Ticket turnaround</a> alongside this one carries the numbers. This engagement carries the method, and the method is the part that transfers.</p>
+<h2 id="why-it-matters-again-now"><span class="hash">#</span>Why it matters again now<a class="anchor" href="#why-it-matters-again-now" aria-label="Link to this section">#</a></h2>
+<p>Payments is the deepest thread in my fifteen years: PayPal in Dublin, payment-gateway and gaming-license compliance at Tipico, multi-gateway integration under sub-second latency and failover requirements at Oddspedia, BaFin-supervised core banking here, and today European payment sovereignty at Cubic, integrating European Payments Initiative digital identity with account-centric transit fare payment.</p>
+<p>The same translation problem is arriving again, at scale, on a published timetable. PSD3 and the Payment Services Regulation reached final compromise texts in April 2026, with application expected around 2028 and the Verification of Payee extension roughly six months behind it. Verification of Payee has been mandatory for euro instant credit transfers since October 2025. The digital euro pilot phase begins staffing now. Every payment service provider in the EU is about to turn several hundred pages of regulation into systems that examiners will test.</p>
+<p>That is the same job as the one above, with more zeroes. It is the job I want.</p>
+<p>---</p>
+<p><em>Related: <a href="hub-and-spoke-estate.html">running an infrastructure estate like a regulated hub-and-spoke organization</a> applies the same doctrine to an operating model instead of a ledger.</em></p>
+</main>
+<footer>
+<p><a href="../index.html">Maurice Jobst</a> · <a href="https://github.com/maurice-jobst">GitHub</a> · <a href="https://www.linkedin.com/in/mauricejobst/">LinkedIn</a> · <a href="mailto:maurice.jobst@gmail.com">Email</a></p>
+<p class="fine">Static HTML, zero JavaScript, no third-party requests. This page carries no instructions for an agent, only facts about a person.</p>
+</footer>
+</body>
+</html>
