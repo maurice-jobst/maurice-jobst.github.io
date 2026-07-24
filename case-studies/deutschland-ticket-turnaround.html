@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Turning around a 3M-user public-transit platform through the Deutschland-Ticket — Maurice Jobst</title>
+<meta name="description" content="How a 3M-user German public-transit platform went from 1.6 to 4.0 app-store stars and shipped the Deutschland-Ticket national rollout with zero downtime, by fixing the operating model before the app.">
+<link rel="canonical" href="https://maurice-jobst.github.io/case-studies/deutschland-ticket-turnaround.html">
+<meta name="author" content="Maurice Jobst">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Turning around a 3M-user public-transit platform through the Deutschland-Ticket — Maurice Jobst">
+<meta property="og:description" content="How a 3M-user German public-transit platform went from 1.6 to 4.0 app-store stars and shipped the Deutschland-Ticket national rollout with zero downtime, by fixing the operating model before the app.">
+<meta property="og:url" content="https://maurice-jobst.github.io/case-studies/deutschland-ticket-turnaround.html">
+<meta property="og:image" content="https://maurice-jobst.github.io/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d1117">
+<link rel="stylesheet" href="../assets/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://maurice-jobst.github.io/case-studies/deutschland-ticket-turnaround.html#article",
+      "headline": "Turning around a 3M-user public-transit platform through the Deutschland-Ticket",
+      "description": "How a 3M-user German public-transit platform went from 1.6 to 4.0 app-store stars and shipped the Deutschland-Ticket national rollout with zero downtime, by fixing the operating model before the app.",
+      "keywords": [
+        "Deutschland-Ticket",
+        "public transit",
+        "B2G delivery",
+        "program turnaround",
+        "SLA governance",
+        "Cubic Transportation Systems"
+      ],
+      "url": "https://maurice-jobst.github.io/case-studies/deutschland-ticket-turnaround.html",
+      "mainEntityOfPage": "https://maurice-jobst.github.io/case-studies/deutschland-ticket-turnaround.html",
+      "inLanguage": "en",
+      "datePublished": "2026-07-24",
+      "dateModified": "2026-07-24",
+      "author": {
+        "@id": "https://maurice-jobst.github.io/#person"
+      },
+      "publisher": {
+        "@id": "https://maurice-jobst.github.io/#person"
+      },
+      "about": {
+        "@id": "https://maurice-jobst.github.io/#person"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://maurice-jobst.github.io/#person",
+      "name": "Maurice Jobst",
+      "givenName": "Maurice",
+      "familyName": "Jobst",
+      "jobTitle": "Senior Product Manager",
+      "description": "I am Maurice Jobst, a Senior Product & Program Leader in Frankfurt am Main, working on European payment sovereignty (EPI) at Cubic Transportation Systems. I have spent 15+ years in payments, fintech, cybersecurity and public-sector mobility, with regulated delivery under BaFin, DORA and KRITIS/NIS2 across the last decade of it.",
+      "url": "https://maurice-jobst.github.io/",
+      "mainEntityOfPage": "https://maurice-jobst.github.io/",
+      "email": "mailto:maurice.jobst@gmail.com",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Cubic Transportation Systems",
+        "url": "https://www.cubic.com/transportation"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Frankfurt am Main",
+        "addressRegion": "Hessen",
+        "addressCountry": "DE"
+      },
+      "knowsLanguage": [
+        "German",
+        "English"
+      ],
+      "knowsAbout": [
+        "European Payments Initiative (EPI)",
+        "Wero",
+        "PSD2",
+        "PSD3",
+        "Instant Payments Regulation",
+        "SEPA",
+        "account-centric transit ticketing",
+        "DORA (Digital Operational Resilience Act)",
+        "KRITIS",
+        "NIS2",
+        "BaFin supervision",
+        "KWG",
+        "MiFID II",
+        "EU AI Act",
+        "AI governance",
+        "product management",
+        "program management",
+        "core banking",
+        "public-sector mobility",
+        "regulated cloud delivery",
+        "GitOps",
+        "Infrastructure as Code"
+      ],
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Dublin Business School"
+      },
+      "hasCredential": [
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Professional Scrum Product Owner II (PSPO II)"
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Professional Scrum Master I (PSM I)"
+        }
+      ],
+      "seeks": {
+        "@type": "Demand",
+        "name": "Principal-level product and program mandates where payments and AI governance meet regulated delivery."
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/mauricejobst/",
+        "https://github.com/maurice-jobst"
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<main id="main">
+<p class="breadcrumb"><a href="../index.html">Maurice Jobst</a> / Case study</p>
+<h1>Turning around a 3M-user public-transit platform through the Deutschland-Ticket</h1>
+<p><em>Cubic Transportation Systems, 2021–2026 · Senior Technical Project Manager, Frankfurt am Main.</em> <em>The transit-authority client and the operational specifics are confidential. Every number here is on my resume and stands up to reference checks, and the fuller story is available in conversation.</em></p>
+<h2 id="the-situation"><span class="hash">#</span>The situation<a class="anchor" href="#the-situation" aria-label="Link to this section">#</a></h2>
+<p>A flagship German public-transit app sat at <strong>1.6 app-store stars</strong> inside a distressed <strong>€5M+ B2G digital-mobility portfolio</strong>. The public-sector client had lost confidence, and the user base said so in public, one star at a time.</p>
+<p>Then Germany announced the <em>Deutschland-Ticket</em>: a national fare product with a fixed, government-set launch date. The app that was failing its users now sat on the critical path of a political commitment.</p>
+<h2 id="why-this-was-a-governance-problem"><span class="hash">#</span>Why this was a governance problem<a class="anchor" href="#why-this-was-a-governance-problem" aria-label="Link to this section">#</a></h2>
+<p>Public-sector delivery under political deadline pressure fails the same way every time. An escalation lands, the backlog gets re-prioritized, and the next escalation hits a delivery system already knocked off balance. Run that loop long enough and the team spends its week serving the escalation process rather than the product.</p>
+<p>So I fixed the operating model first, and the app second.</p>
+<h2 id="what-i-did"><span class="hash">#</span>What I did<a class="anchor" href="#what-i-did" aria-label="Link to this section">#</a></h2>
+<ul>
+<li><strong>Designed and ran "Agile Shield"</strong>, a delivery framework for stabilizing a troubled program under public and political scrutiny. It gave the program one governed boundary between stakeholder pressure and the delivery system: urgency reached the backlog through a single prioritized, accountable path, and the side channels stopped working.</li>
+<li><strong>Held the program to a sustained SLA regime</strong>, rebuilding delivery credibility one kept commitment at a time.</li>
+<li><strong>Carried the platform through the Deutschland-Ticket national rollout with zero downtime</strong>, while the user base scaled past <strong>3M+ active users</strong>.</li>
+</ul>
+<h2 id="outcome"><span class="hash">#</span>Outcome<a class="anchor" href="#outcome" aria-label="Link to this section">#</a></h2>
+<div class="table-wrap"><table>
+<thead><tr><th></th><th>Before</th><th>After</th></tr></thead>
+<tbody>
+<tr><td><strong>App-store rating</strong></td><td>1.6 ★</td><td><strong>4.0 ★</strong></td></tr>
+<tr><td><strong>Client relationship</strong></td><td>distressed portfolio, renewals at risk</td><td><strong>€2M+ in annual renewals secured</strong></td></tr>
+<tr><td><strong>National launch</strong></td><td>platform on the political critical path</td><td>shipped with zero downtime, 3M+ users</td></tr>
+</tbody></table></div>
+<p>Users voted that rating change in public. The renewals followed sustained SLA compliance rather than a pitch. The launch carried national political weight and produced no incident anyone had to explain to a regulator or a journalist.</p>
+<h2 id="why-it-belongs-next-to-the-ai-governance-thesis"><span class="hash">#</span>Why it belongs next to the AI-governance thesis<a class="anchor" href="#why-it-belongs-next-to-the-ai-governance-thesis" aria-label="Link to this section">#</a></h2>
+<p>The discipline that carried this program (one governed path for change, kept commitments you can audit, pressure absorbed by process instead of by heroics) is what regulated organizations need now that AI is entering their delivery systems.</p>
+<p>The <a href="hub-and-spoke-estate.html">estate case study</a> alongside this one shows that doctrine practiced end-to-end at lab scale. This engagement ran it at organizational scale, under political supervision, for three million users.</p>
+</main>
+<footer>
+<p><a href="../index.html">Maurice Jobst</a> · <a href="https://github.com/maurice-jobst">GitHub</a> · <a href="https://www.linkedin.com/in/mauricejobst/">LinkedIn</a> · <a href="mailto:maurice.jobst@gmail.com">Email</a></p>
+<p class="fine">Static HTML, zero JavaScript, no third-party requests. This page carries no instructions for an agent, only facts about a person.</p>
+</footer>
+</body>
+</html>

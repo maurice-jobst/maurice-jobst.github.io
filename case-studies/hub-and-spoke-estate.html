@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Running a personal infrastructure estate like a regulated hub-and-spoke organization — Maurice Jobst</title>
+<meta name="description" content="Running a personal infrastructure estate on one reconcile shape, hub-and-spoke doctrine and machine-checked conformance, and why a cooperative banking group or a KRITIS operator has the same problem at a different scale.">
+<link rel="canonical" href="https://maurice-jobst.github.io/case-studies/hub-and-spoke-estate.html">
+<meta name="author" content="Maurice Jobst">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Running a personal infrastructure estate like a regulated hub-and-spoke organization — Maurice Jobst">
+<meta property="og:description" content="Running a personal infrastructure estate on one reconcile shape, hub-and-spoke doctrine and machine-checked conformance, and why a cooperative banking group or a KRITIS operator has the same problem at a different scale.">
+<meta property="og:url" content="https://maurice-jobst.github.io/case-studies/hub-and-spoke-estate.html">
+<meta property="og:image" content="https://maurice-jobst.github.io/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d1117">
+<link rel="stylesheet" href="../assets/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://maurice-jobst.github.io/case-studies/hub-and-spoke-estate.html#article",
+      "headline": "Running a personal infrastructure estate like a regulated hub-and-spoke organization",
+      "description": "Running a personal infrastructure estate on one reconcile shape, hub-and-spoke doctrine and machine-checked conformance, and why a cooperative banking group or a KRITIS operator has the same problem at a different scale.",
+      "keywords": [
+        "hub and spoke",
+        "GitOps",
+        "Infrastructure as Code",
+        "AI governance",
+        "KRITIS",
+        "drift control",
+        "operating model"
+      ],
+      "url": "https://maurice-jobst.github.io/case-studies/hub-and-spoke-estate.html",
+      "mainEntityOfPage": "https://maurice-jobst.github.io/case-studies/hub-and-spoke-estate.html",
+      "inLanguage": "en",
+      "datePublished": "2026-07-24",
+      "dateModified": "2026-07-24",
+      "author": {
+        "@id": "https://maurice-jobst.github.io/#person"
+      },
+      "publisher": {
+        "@id": "https://maurice-jobst.github.io/#person"
+      },
+      "about": {
+        "@id": "https://maurice-jobst.github.io/#person"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://maurice-jobst.github.io/#person",
+      "name": "Maurice Jobst",
+      "givenName": "Maurice",
+      "familyName": "Jobst",
+      "jobTitle": "Senior Product Manager",
+      "description": "I am Maurice Jobst, a Senior Product & Program Leader in Frankfurt am Main, working on European payment sovereignty (EPI) at Cubic Transportation Systems. I have spent 15+ years in payments, fintech, cybersecurity and public-sector mobility, with regulated delivery under BaFin, DORA and KRITIS/NIS2 across the last decade of it.",
+      "url": "https://maurice-jobst.github.io/",
+      "mainEntityOfPage": "https://maurice-jobst.github.io/",
+      "email": "mailto:maurice.jobst@gmail.com",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Cubic Transportation Systems",
+        "url": "https://www.cubic.com/transportation"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Frankfurt am Main",
+        "addressRegion": "Hessen",
+        "addressCountry": "DE"
+      },
+      "knowsLanguage": [
+        "German",
+        "English"
+      ],
+      "knowsAbout": [
+        "European Payments Initiative (EPI)",
+        "Wero",
+        "PSD2",
+        "PSD3",
+        "Instant Payments Regulation",
+        "SEPA",
+        "account-centric transit ticketing",
+        "DORA (Digital Operational Resilience Act)",
+        "KRITIS",
+        "NIS2",
+        "BaFin supervision",
+        "KWG",
+        "MiFID II",
+        "EU AI Act",
+        "AI governance",
+        "product management",
+        "program management",
+        "core banking",
+        "public-sector mobility",
+        "regulated cloud delivery",
+        "GitOps",
+        "Infrastructure as Code"
+      ],
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Dublin Business School"
+      },
+      "hasCredential": [
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Professional Scrum Product Owner II (PSPO II)"
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Professional Scrum Master I (PSM I)"
+        }
+      ],
+      "seeks": {
+        "@type": "Demand",
+        "name": "Principal-level product and program mandates where payments and AI governance meet regulated delivery."
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/mauricejobst/",
+        "https://github.com/maurice-jobst"
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<main id="main">
+<p class="breadcrumb"><a href="../index.html">Maurice Jobst</a> / Case study</p>
+<h1>Running a personal infrastructure estate like a regulated hub-and-spoke organization</h1>
+<p><em>A dozen-plus repositories, two physical sites and three domains that must never mix, run by one part-time operator on a single operating model. That model is what a regulated hub-and-spoke organization needs.</em></p>
+<p>I run a personal infrastructure estate for my household: a containerized home server, a managed workstation, a private git forge, a second physical site, and a dozen-plus active repositories spanning infrastructure, a small business and personal administration. Three domains must never mix, across two sites, with one part-time operator, and AI sessions run in the loop across all of it every day.</p>
+<p>You cannot hold that in your head, and meetings will not save you. It runs anyway, because every change reduces to one shape.</p>
+<h2 id="one-reconcile-shape-one-direction"><span class="hash">#</span>One reconcile shape, one direction<a class="anchor" href="#one-reconcile-shape-one-direction" aria-label="Link to this section">#</a></h2>
+<p>Every change moves the same way: <strong>author on the workstation → commit to the canonical forge → converge onto the target</strong>. Infrastructure converges via Ansible onto the hosts. Repo governance (labels, branch protection, milestones) converges via idempotent provisioning scripts onto the forge. Documents converge via protected-branch PR flow into their repos.</p>
+<p>I never fix anything <em>on</em> a target. I encode the fix at the source and let the pipeline reapply it. Hand-edit a live host and you have forked it, and that fork comes back later as drift.</p>
+<p>One shape buys transfer. An operator who has learned it once, human or AI, can act in any spoke (the small-business repo, the personal-documents archive, the infrastructure tree), because landing a change works identically everywhere. Only the content differs.</p>
+<h2 id="hub-and-spoke-doctrine-lives-once"><span class="hash">#</span>Hub and spoke: doctrine lives once<a class="anchor" href="#hub-and-spoke-doctrine-lives-once" aria-label="Link to this section">#</a></h2>
+<p>Cross-cutting doctrine (the git model, secrets handling, the AI operating rules) lives once, in the hub. Each spoke carries a short self-contained brief that cites the hub instead of restating it, budgeted to orient a cold session fast. Restate it and you get a dozen drifting copies of the same paragraph, each one read by an AI session as equally authoritative. Duplication turns into a correctness problem the moment your workforce includes agents.</p>
+<p>A small dependency-free validator walks the federation register and reports green or red per repo: canonical file present, tool-specific files symlinked instead of diverged, agent-facing surface conformant. Nobody has to remember the doc standard, because the machine checks it.</p>
+<h2 id="time-to-dock-a-new-unit"><span class="hash">#</span>Time to dock a new unit<a class="anchor" href="#time-to-dock-a-new-unit" aria-label="Link to this section">#</a></h2>
+<p>Judge an operating model by what it costs to dock a new unit. Here, docking a spoke (new repo, governance, briefing doc, issue taxonomy, protected mainline) takes a converge script and a PR.</p>
+<p>In one recent session I restructured a personal-documents archive to current conventions, converged its forge governance (scoped labels, issue templates, branch protection) through an API script, fenced a sensitive personal dataset in tool configuration rather than in prose, and landed the whole change through the same protected PR flow the infrastructure uses.</p>
+<p>That speed comes from three costs I deleted. Each unit reuses one shape instead of a bespoke process. The hub already holds the doctrine, so nobody does archaeology. Everything converges from code, so I never reconstruct state by hand.</p>
+<h2 id="where-ai-belongs-and-where-it-does-not"><span class="hash">#</span>Where AI belongs, and where it does not<a class="anchor" href="#where-ai-belongs-and-where-it-does-not" aria-label="Link to this section">#</a></h2>
+<p>The doctrine fits in one sentence: <strong>AI at the edges, deterministic core.</strong> The agent authors config, drafts documents, triages findings and proposes plans. It never sits inside a path that must be byte-reproducible: converge, deploy, secrets. A deterministic sweep audits the estate weekly with pure reads and structured output, so it cannot hallucinate a green light. The agent reasons about the findings afterward.</p>
+<p>Both kinds of operator get the same write rules. The mainline is push-protected, every change lands as a reviewable PR, and review runs in both directions: I review the agent's work, and the agent reviews mine. One category of sensitive personal records the model must never read at all, and that fence is a deny rule in the tool's permission layer instead of a sentence in a README.</p>
+<h2 id="the-generalizable-part"><span class="hash">#</span>The generalizable part<a class="anchor" href="#the-generalizable-part" aria-label="Link to this section">#</a></h2>
+<p>This estate is household-scale by design, and I do not claim otherwise. What transfers is the operating model.</p>
+<p>Map the nouns and you get a regulated enterprise's problem statement. A cooperative banking group or a KRITIS operator has decentralized units that must dock onto central doctrine without a central bottleneck, regulators who ask them to <em>prove the estate matches its policy</em> rather than to produce one, and AI capability to adopt without ever letting it into the audited core.</p>
+<p>The federation answers are the enterprise answers at a smaller scale:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Problem</th><th>Answer</th></tr></thead>
+<tbody>
+<tr><td>Doctrine drifts across units</td><td>It lives once in the hub and gets cited, never copied</td></tr>
+<tr><td>Onboarding a unit costs a project</td><td>Every unit docks through one reconcile shape</td></tr>
+<tr><td>Conformance depends on a committee</td><td>A validator checks it per repo, green or red</td></tr>
+<tr><td>AI capability threatens the audited core</td><td>AI at the edges under symmetric review, irreversible paths deterministic</td></tr>
+</tbody></table></div>
+<p>Drift is the primary enemy at any scale, in config, in docs or in policy, because it is always the same gap: what the organization believes about itself versus what is actually running.</p>
+<p>An operating model that depends on people remembering the doctrine will drift. Put the doctrine in a hub, dock the units through one landing path, and let a machine do the checking. Then the next unit, or the next agent, costs you a day.</p>
+</main>
+<footer>
+<p><a href="../index.html">Maurice Jobst</a> · <a href="https://github.com/maurice-jobst">GitHub</a> · <a href="https://www.linkedin.com/in/mauricejobst/">LinkedIn</a> · <a href="mailto:maurice.jobst@gmail.com">Email</a></p>
+<p class="fine">Static HTML, zero JavaScript, no third-party requests. This page carries no instructions for an agent, only facts about a person.</p>
+</footer>
+</body>
+</html>
