@@ -5,6 +5,12 @@
  * past a paragraph, which the author of the reference implementation says
  * himself, so the grid discipline stays and the long text does not.
  *
+ * Prose sits in a 40rem measure, about 72 characters. The data blocks (metrics,
+ * work cards, the career table) break out to 56rem: a four-column CV squeezed
+ * into a reading measure produced the horizontal scrollbar this layout
+ * replaced. Both widths share a left edge, so you read one column with wider
+ * figures beside it.
+ *
  * No web fonts, no JavaScript, no third-party request. System stacks only.
  */
 
@@ -14,41 +20,60 @@
   --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
   --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
+  /* Type scale. The chrome carried eight ad-hoc monospace sizes between 0.68rem
+     and 0.86rem, which reads as noise. Three sizes now. */
+  --fs-mono-xs: 0.6875rem;   /* 11px: uppercase kickers and column heads only */
+  --fs-mono-sm: 0.8125rem;   /* 13px: nav, chips, tags, footer, table data     */
+  --fs-mono-md: 0.875rem;    /* 14px: rail, buttons                            */
+  --fs-sm: 0.875rem;         /* 14px: captions, notes, fine print              */
+  --fs-base: 1.0625rem;      /* 17px: body                                     */
+  --fs-lead: 1.1875rem;      /* 19px: the answer block                         */
+
   --bg: #ffffff;
   --bg-soft: #f6f8fa;
   --bg-raised: #ffffff;
   --fg: #1f2328;
   --fg-muted: #59636e;
-  --fg-faint: #818b98;
+  /* was #818b98, 3.4:1 on white, which fails WCAG AA at the 11-13px sizes this
+     variable serves. #656d76 is 5.2:1. */
+  --fg-faint: #656d76;
   --accent: #0969da;
   --accent-soft: rgba(9, 105, 218, 0.09);
+  /* text on a filled accent button: white fails on the dark-mode accent */
+  --on-accent: #ffffff;
   --border: #d1d9e0;
   --border-soft: #e4e8ed;
+  --shadow-card: 0 1px 2px rgba(31, 35, 40, 0.05);
+  --shadow-card-hover: 0 2px 10px rgba(9, 105, 218, 0.10);
 
   /* rem, not ch: the footer and nav are monospace, and a ch measure would give
      them a different column width than the proportional body text. */
-  --measure: 44rem;
-  --gap: 1.5rem;
+  --measure: 40rem;
+  --wide: 56rem;
+  --pad: 1.25rem;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #0d1117;
     --bg-soft: #161b22;
-    --bg-raised: #11161d;
+    --bg-raised: #151b23;
     --fg: #e6edf3;
     --fg-muted: #9fb0c0;
-    --fg-faint: #768390;
+    --fg-faint: #8b98a5;
     --accent: #58a6ff;
-    --accent-soft: rgba(88, 166, 255, 0.11);
-    --border: #30363d;
-    --border-soft: #22282f;
+    --accent-soft: rgba(88, 166, 255, 0.13);
+    --on-accent: #0d1117;
+    --border: #3d444d;
+    --border-soft: #262c34;
+    --shadow-card: none;
+    --shadow-card-hover: 0 2px 12px rgba(88, 166, 255, 0.12);
   }
 }
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; scroll-padding-top: 4rem; }
+html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   * { transition: none !important; }
@@ -56,18 +81,39 @@ html { scroll-behavior: smooth; scroll-padding-top: 4rem; }
 
 body {
   margin: 0;
-  padding: 0 1.25rem 5rem;
+  padding: 0 var(--pad) 5rem;
   background: var(--bg);
   color: var(--fg);
   font-family: var(--sans);
-  font-size: 17px;
-  line-height: 1.65;
+  font-size: var(--fs-base);
+  line-height: 1.6;
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-main, footer, .topnav .row { max-width: var(--measure); }
-main, footer, .topnav .row { margin: 0 auto; }
+@media (min-width: 56rem) {
+  :root { --pad: 2rem; }
+}
+
+/* ---- the two-width column -------------------------------------------- */
+
+main, footer {
+  max-width: var(--wide);
+  margin: 0 auto;
+}
+
+/* Prose runs in the narrow measure, flush to the shared left edge. The selectors
+   listed below mark the figures, which take the full frame. */
+main > * { max-width: var(--measure); }
+main > .topnav,
+main > .breadcrumb,
+main > .hero,
+main > h2,
+main > .metrics,
+main > .grid,
+main > .chips,
+main > .table-wrap { max-width: none; }
 
 ::selection { background: var(--accent-soft); }
 
@@ -94,24 +140,24 @@ a:hover { text-decoration: underline; }
   position: sticky;
   top: 0;
   z-index: 5;
-  margin: 0 -1.25rem;
-  padding: 0.7rem 1.25rem;
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  margin: 0 calc(-1 * var(--pad));
+  padding: 0.65rem var(--pad);
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
   backdrop-filter: saturate(180%) blur(8px);
   border-bottom: 1px solid var(--border-soft);
   font-family: var(--mono);
-  font-size: 0.8rem;
+  font-size: var(--fs-mono-sm);
 }
 .topnav .row {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: 0 1.15rem;
+  gap: 0.25rem 1.15rem;
 }
 .topnav .brand { color: var(--fg-faint); margin-right: auto; }
 .topnav .brand::before { content: "~/"; color: var(--accent); }
 .topnav a { color: var(--fg-muted); }
-.topnav a::before { content: "#"; color: var(--accent); opacity: 0.65; }
+.topnav a::before { content: "#"; color: var(--accent); opacity: 0.7; }
 .topnav a:hover { color: var(--accent); text-decoration: none; }
 
 /* ---- hero ------------------------------------------------------------ */
@@ -120,9 +166,14 @@ a:hover { text-decoration: underline; }
   display: flex;
   align-items: center;
   gap: 1.75rem;
-  margin: 2.75rem 0 1.75rem;
+  margin: 3rem 0 1.75rem;
 }
-.hero-text { border-left: 4px solid var(--accent); padding-left: 1.1rem; min-width: 0; }
+.hero-text {
+  border-left: 4px solid var(--accent);
+  padding-left: 1.15rem;
+  min-width: 0;
+  max-width: 46rem;
+}
 .hero-mark { flex: 0 0 auto; order: 2; margin-left: auto; }
 
 .mark .spokes { stroke: var(--accent); opacity: 0.5; }
@@ -131,78 +182,96 @@ a:hover { text-decoration: underline; }
 .mark .core { fill: var(--accent); }
 
 h1 {
-  font-size: clamp(2rem, 6vw, 2.9rem);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  margin: 0 0 0.3rem;
+  font-size: clamp(2.05rem, 5.5vw, 2.85rem);
+  line-height: 1.08;
+  letter-spacing: -0.021em;
+  text-wrap: balance;
+  margin: 0 0 0.35rem;
 }
-.role { font-size: 1.1rem; color: var(--fg-muted); margin: 0 0 0.45rem; }
+/* scoped: .role is also a career-table cell, which this rule used to enlarge */
+.hero .role {
+  font-size: 1.125rem;
+  color: var(--fg-muted);
+  text-wrap: balance;
+  margin: 0 0 0.5rem;
+}
 .rail {
   font-family: var(--mono);
-  font-size: 0.85rem;
+  font-size: var(--fs-mono-md);
   font-weight: 600;
   color: var(--accent);
-  letter-spacing: 0.02em;
-  margin: 0 0 0.3rem;
+  letter-spacing: 0.01em;
+  text-wrap: balance;
+  margin: 0 0 0.35rem;
 }
 .stamp {
   font-family: var(--mono);
-  font-size: 0.72rem;
+  font-size: var(--fs-mono-sm);
+  line-height: 1.55;
   color: var(--fg-faint);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.01em;
+  text-wrap: pretty;
   margin: 0;
 }
-.rail i, .stamp i, .fine i { font-style: normal; opacity: 0.45; padding: 0 0.15em; }
+.rail i, .stamp i, .fine i { font-style: normal; opacity: 0.5; padding: 0 0.15em; }
+.rail span, .stamp span { white-space: nowrap; }
 
-@media (max-width: 620px) {
-  .hero { gap: 1.1rem; }
+@media (max-width: 46rem) {
+  .hero { gap: 1.1rem; margin-top: 2.25rem; }
   .hero-mark { display: none; }
 }
 
 .answer {
-  font-size: 1.16rem;
-  line-height: 1.6;
-  margin: 0 0 1.35rem;
+  font-size: var(--fs-lead);
+  line-height: 1.58;
+  text-wrap: pretty;
+  margin: 0 0 1.5rem;
 }
 
 /* ---- buttons --------------------------------------------------------- */
 
 .cta { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 2.25rem; }
 .btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.25rem;
   font-family: var(--mono);
-  font-size: 0.82rem;
-  padding: 0.42rem 0.85rem;
+  font-size: var(--fs-mono-sm);
+  padding: 0.3rem 0.95rem;
   border: 1px solid var(--border);
   border-radius: 6px;
   background: var(--bg-soft);
   color: var(--fg);
+  transition: border-color 0.15s ease, color 0.15s ease;
 }
 .btn:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
-.btn.primary { background: var(--accent); border-color: var(--accent); color: #ffffff; }
-.btn.primary:hover { filter: brightness(1.08); color: #ffffff; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.btn.primary:hover { filter: brightness(1.08); color: var(--on-accent); }
 
 /* ---- metrics --------------------------------------------------------- */
 
+/* A 1px gap over a border-coloured background draws the dividers in both axes.
+   The old border-right-per-cell rule left the wrapped row with no rule above. */
 .metrics {
   list-style: none;
   display: grid;
-  /* min() so the track collapses below its ideal width instead of overflowing
-     a 320px viewport */
-  grid-template-columns: repeat(auto-fit, minmax(min(9.5rem, 100%), 1fr));
-  gap: 0;
-  margin: 0 0 0.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0 0 0.6rem;
   padding: 0;
   border: 1px solid var(--border);
   border-radius: 8px;
   overflow: hidden;
-  background: var(--bg-soft);
+  background: var(--border-soft);
+}
+@media (min-width: 40rem) {
+  .metrics { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 .metrics li {
-  padding: 0.85rem 1rem;
-  border-right: 1px solid var(--border-soft);
+  padding: 0.9rem 1rem;
   margin: 0;
+  background: var(--bg-soft);
 }
-.metrics li:last-child { border-right: 0; }
 .metrics .value {
   display: block;
   font-family: var(--mono);
@@ -210,35 +279,42 @@ h1 {
   font-size: 1.35rem;
   font-weight: 600;
   letter-spacing: -0.01em;
+  line-height: 1.25;
   color: var(--fg);
 }
 .metrics .label {
   display: block;
-  font-size: 0.78rem;
+  font-size: var(--fs-sm);
   line-height: 1.4;
+  text-wrap: pretty;
   color: var(--fg-muted);
-  margin-top: 0.15rem;
+  margin-top: 0.25rem;
 }
 
 /* ---- headings -------------------------------------------------------- */
 
 h2 {
   position: relative;
-  font-size: 1.32rem;
-  line-height: 1.3;
-  letter-spacing: -0.01em;
-  margin: 3rem 0 0.9rem;
-  padding-bottom: 0.4rem;
+  font-size: 1.45rem;
+  line-height: 1.25;
+  letter-spacing: -0.014em;
+  margin: 3.25rem 0 1rem;
+  padding-bottom: 0.45rem;
   border-bottom: 1px solid var(--border-soft);
 }
 h2 .hash {
   font-family: var(--mono);
   color: var(--accent);
-  opacity: 0.7;
+  opacity: 0.75;
   margin-right: 0.45rem;
   font-weight: 500;
 }
-h3 { font-size: 1.06rem; line-height: 1.35; margin: 1.9rem 0 0.35rem; }
+h3 {
+  font-size: 1.1rem;
+  line-height: 1.35;
+  letter-spacing: -0.008em;
+  margin: 2rem 0 0.4rem;
+}
 h3 + p { margin-top: 0; }
 
 .anchor {
@@ -250,60 +326,70 @@ h3 + p { margin-top: 0; }
 }
 h2:hover .anchor, h3:hover .anchor, .anchor:focus-visible { opacity: 1; }
 
-p { margin: 0 0 1.05rem; }
+p { margin: 0 0 1.1rem; text-wrap: pretty; }
 
 /* ---- cards ----------------------------------------------------------- */
 
+/* Fixed track counts rather than auto-fit: there are three case studies, and
+   auto-fit at this frame width left the third one alone in a two-up row. */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(19rem, 100%), 1fr));
-  gap: 0.9rem;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
   margin-bottom: 1rem;
+}
+@media (min-width: 60rem) {
+  .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 .card {
   border: 1px solid var(--border);
-  border-radius: 9px;
-  padding: 1.05rem 1.15rem 0.9rem;
+  border-radius: 10px;
+  padding: 1.1rem 1.2rem 1rem;
   background: var(--bg-raised);
+  box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
-  transition: border-color 0.15s ease;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
-.card:hover { border-color: var(--accent); }
+.card:hover { border-color: var(--accent); box-shadow: var(--shadow-card-hover); }
 .card.wide { grid-column: 1 / -1; }
-.card.wide .chips { max-width: 46ch; }
+.card.wide .card-desc, .card.wide .chips { max-width: var(--measure); }
 .kicker {
   font-family: var(--mono);
-  font-size: 0.68rem;
+  font-size: var(--fs-mono-xs);
   letter-spacing: 0.11em;
   text-transform: uppercase;
   color: var(--fg-faint);
-  margin: 0 0 0.4rem;
+  margin: 0 0 0.45rem;
 }
-.card h3 { margin: 0 0 0.45rem; font-size: 1rem; }
-.card-desc { font-size: 0.92rem; color: var(--fg-muted); margin: 0 0 0.7rem; }
+.card h3 { margin: 0 0 0.5rem; font-size: 1.02rem; line-height: 1.3; }
+.card-desc { font-size: 0.9375rem; line-height: 1.5; color: var(--fg-muted); margin: 0 0 0.8rem; }
+
+/* The label sits on its own line. Inline, the wrapped text ran back underneath
+   it; as a grid column it left a dead gutter down the side of a narrow card. */
 .outcome {
   font-family: var(--mono);
-  font-size: 0.78rem;
+  font-size: var(--fs-mono-sm);
   line-height: 1.55;
   color: var(--fg);
   background: var(--accent-soft);
-  border-radius: 5px;
-  padding: 0.4rem 0.6rem;
-  margin: 0 0 0.7rem;
+  border-radius: 6px;
+  padding: 0.5rem 0.7rem;
+  margin: 0 0 0.8rem;
 }
 .outcome span {
+  display: block;
   text-transform: uppercase;
   letter-spacing: 0.09em;
-  font-size: 0.66rem;
+  font-size: var(--fs-mono-xs);
   color: var(--accent);
-  margin-right: 0.5rem;
+  margin-bottom: 0.15rem;
 }
 .card-links {
   font-family: var(--mono);
-  font-size: 0.78rem;
+  font-size: var(--fs-mono-sm);
   margin: auto 0 0;
-  padding-top: 0.55rem;
+  padding-top: 0.6rem;
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
@@ -316,72 +402,125 @@ p { margin: 0 0 1.05rem; }
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.32rem;
+  gap: 0.35rem;
   padding: 0;
-  margin: 0 0 0.7rem;
+  margin: 0 0 0.8rem;
 }
 .chips li {
   font-family: var(--mono);
-  font-size: 0.71rem;
-  line-height: 1.5;
+  font-size: var(--fs-mono-sm);
+  line-height: 1.6;
   color: var(--fg-muted);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 0.08rem 0.4rem;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: 5px;
+  padding: 0.1rem 0.5rem;
   margin: 0;
 }
 
 /* ---- tables ---------------------------------------------------------- */
 
-.table-wrap { overflow-x: auto; margin: 0 0 1.1rem; }
+/* The wrapper still scrolls, because a markdown table in a case study can be
+   any shape. The two local gradients fade in only when content sits off-screen
+   in that direction, so a table that fits shows nothing. */
+.table-wrap {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  margin: 0 0 1.2rem;
+  background:
+    linear-gradient(to right, var(--bg) 40%, transparent) 0 0 / 2.5rem 100% no-repeat local,
+    linear-gradient(to left, var(--bg) 40%, transparent) 100% 0 / 2.5rem 100% no-repeat local,
+    radial-gradient(farthest-side at 0 50%, var(--border), transparent) 0 0 / 0.6rem 100% no-repeat scroll,
+    radial-gradient(farthest-side at 100% 50%, var(--border), transparent) 100% 0 / 0.6rem 100% no-repeat scroll;
+}
 table {
   border-collapse: collapse;
   width: 100%;
-  font-size: 0.93rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
 }
 th, td {
   border: 1px solid var(--border-soft);
-  padding: 0.5rem 0.7rem;
+  padding: 0.55rem 0.75rem;
   text-align: left;
   vertical-align: top;
 }
 th {
   background: var(--bg-soft);
   font-family: var(--mono);
-  font-size: 0.72rem;
+  font-size: var(--fs-mono-xs);
   letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--fg-muted);
   font-weight: 600;
 }
+
+/* ---- career ---------------------------------------------------------- */
+
+/* Wide: a real four-column table with widths that hold, and a Scope column
+   that wraps instead of forcing the whole table into a scroll container. */
+.career-wrap { overflow-x: visible; background: none; }
+table.career { table-layout: fixed; }
 table.career td { border-left: 0; border-right: 0; }
-table.career .years, table.career .scope {
+table.career th:nth-child(1), table.career td:nth-child(1) { width: 6rem; }
+table.career th:nth-child(2), table.career td:nth-child(2) { width: 11rem; }
+table.career th:nth-child(3), table.career td:nth-child(3) { width: 13rem; }
+table.career .org, table.career .role { line-height: 1.45; text-wrap: pretty; }
+table.career .years {
   font-family: var(--mono);
   font-variant-numeric: tabular-nums lining-nums;
-  font-size: 0.8rem;
+  font-size: var(--fs-mono-sm);
   color: var(--fg-muted);
   white-space: nowrap;
 }
 table.career .note {
   display: block;
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
+  line-height: 1.45;
   color: var(--fg-muted);
-  font-weight: 400;
-  margin-top: 0.1rem;
+  text-wrap: pretty;
+  margin-bottom: 0.3rem;
+}
+table.career .scope-line {
+  display: block;
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-size: var(--fs-mono-sm);
+  line-height: 1.55;
+  color: var(--fg-muted);
+}
+
+/* Narrow: the same rows as stacked entries. A four-column CV in 390px gives you
+   a horizontal scrollbar and one word per line. */
+@media (max-width: 60rem) {
+  table.career, table.career tbody, table.career tr, table.career td { display: block; width: auto; }
+  table.career thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  table.career tr {
+    border-top: 1px solid var(--border-soft);
+    padding: 0.9rem 0 1rem;
+  }
+  table.career tr:first-child { border-top: 0; }
+  table.career td { border: 0; padding: 0; }
+  table.career td:not(:last-child) { margin-bottom: 0.3rem; }
+  table.career .years {
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
 }
 
 /* ---- prose ----------------------------------------------------------- */
 
 ul { padding-left: 1.2rem; }
-li { margin-bottom: 0.35rem; }
+li { margin-bottom: 0.4rem; }
 
 ul.colophon { list-style: none; padding: 0; }
 ul.colophon li {
   position: relative;
   padding-left: 1.6rem;
-  font-size: 0.93rem;
+  font-size: 0.9375rem;
   color: var(--fg-muted);
-  margin-bottom: 0.45rem;
+  margin-bottom: 0.5rem;
 }
 ul.colophon li::before {
   content: "▸";
@@ -398,33 +537,41 @@ code {
   padding: 0.08rem 0.32rem;
   font-family: var(--mono);
   font-size: 0.86em;
+  overflow-wrap: break-word;
 }
 
 em { color: var(--fg-muted); }
 
-.fine { color: var(--fg-faint); font-size: 0.84rem; }
+.fine { color: var(--fg-faint); font-size: var(--fs-sm); line-height: 1.55; }
 
 .breadcrumb {
   font-family: var(--mono);
-  font-size: 0.78rem;
+  font-size: var(--fs-mono-sm);
   color: var(--fg-faint);
-  margin: 2.25rem 0 1.5rem;
+  margin: 2.25rem 0 1.75rem;
   padding-bottom: 0.6rem;
   border-bottom: 1px solid var(--border-soft);
 }
 
 /* case-study lede: the italic line right under the title */
-main > p > em:only-child { font-style: italic; }
+main > p:has(> em:only-child) {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  margin-top: 1.35rem;
+  margin-bottom: 2.25rem;
+}
+main > p > em:only-child { font-style: italic; color: var(--fg-muted); }
 
 footer {
-  margin-top: 3.75rem;
-  padding-top: 1.2rem;
+  margin-top: 4rem;
+  padding-top: 1.3rem;
   border-top: 1px solid var(--border-soft);
   color: var(--fg-muted);
   font-family: var(--mono);
-  font-size: 0.78rem;
+  font-size: var(--fs-mono-sm);
+  line-height: 1.6;
 }
-footer p { margin-bottom: 0.4rem; }
+footer p { margin-bottom: 0.45rem; }
 
 /* ---- print: a clean CV ----------------------------------------------- */
 
@@ -434,14 +581,21 @@ footer p { margin-bottom: 0.4rem; }
     --fg: #000; --fg-muted: #333; --fg-faint: #555;
     --accent: #000; --accent-soft: #f2f2f2;
     --border: #999; --border-soft: #ccc;
+    --shadow-card: none; --shadow-card-hover: none;
   }
   body { font-size: 10.5pt; padding: 0; }
-  main, footer { max-width: none; }
+  main, footer, main > * { max-width: none; }
   .topnav, .cta, .hero-mark, .anchor, .card-links { display: none; }
   .hero { margin-top: 0; }
   h2 { margin-top: 1.4rem; page-break-after: avoid; }
-  .card, .metrics, table { page-break-inside: avoid; }
+  .card, .metrics, table, table.career tr { page-break-inside: avoid; }
   .grid { grid-template-columns: 1fr; }
+  .table-wrap { background: none; overflow: visible; }
+  /* paper is a narrow column, so print takes the stacked layout */
+  table.career, table.career tbody, table.career tr, table.career td { display: block; width: auto; }
+  table.career thead { display: none; }
+  table.career tr { border-top: 1px solid #ccc; padding: 0.5rem 0; }
+  table.career td { border: 0; padding: 0; }
   a { color: #000; text-decoration: underline; }
   a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 8pt; color: #555; }
 }
