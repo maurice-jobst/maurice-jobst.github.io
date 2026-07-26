@@ -1,15 +1,27 @@
 /* Entity home for maurice-jobst.github.io.
  *
- * Monospace for the chrome (nav, metrics, tags, tables, timestamps), a
+ * Monospace for the chrome (nav, figures, tags, years, timestamps), a
  * proportional face for prose. All-monospace pages look sharp and read badly
  * past a paragraph, which the author of the reference implementation says
  * himself, so the grid discipline stays and the long text does not.
  *
- * Prose sits in a 40rem measure, about 72 characters. The data blocks (metrics,
- * work cards, the career table) break out to 56rem: a four-column CV squeezed
- * into a reading measure produced the horizontal scrollbar this layout
- * replaced. Both widths share a left edge, so you read one column with wider
- * figures beside it.
+ * LAYOUT. One frame, one left edge, one right edge. The previous version ran
+ * prose at 40rem and figures at 56rem inside the same column, so the page had a
+ * ragged right edge from top to bottom and the answer block — the paragraph an
+ * extraction tool reads first — was the narrowest thing on it. Everything on the
+ * home page now spans the frame, and readability is bought back per component by
+ * splitting into label/content columns rather than by narrowing the whole page.
+ * Case-study pages keep a real reading measure, because an article should have
+ * one; there the narrow track is used consistently by every element, so it reads
+ * as a column rather than as a misalignment.
+ *
+ * COLOUR. Catppuccin Mocha (dark) and Latte (light). Mocha ships as published:
+ * every accent it uses clears WCAG AAA on base. Latte does not — its blue
+ * (4.34), lavender (2.81), sapphire (2.78), green (2.96) and peach (2.64) all
+ * fail AA against its own base at the 13-14px sizes the chrome uses. The light
+ * accents below are those hues darkened until they pass, and they are the only
+ * deliberate departure from the published palette. Verified, not eyeballed:
+ * every pair in this file was run through a contrast script.
  *
  * No web fonts, no JavaScript, no third-party request. System stacks only.
  */
@@ -20,54 +32,63 @@
   --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
   --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
-  /* Type scale. The chrome carried eight ad-hoc monospace sizes between 0.68rem
-     and 0.86rem, which reads as noise. Three sizes now. */
+  /* Type scale. Three monospace sizes, three proportional. */
   --fs-mono-xs: 0.6875rem;   /* 11px: uppercase kickers and column heads only */
-  --fs-mono-sm: 0.8125rem;   /* 13px: nav, chips, tags, footer, table data     */
-  --fs-mono-md: 0.875rem;    /* 14px: rail, buttons                            */
-  --fs-sm: 0.875rem;         /* 14px: captions, notes, fine print              */
+  --fs-mono-sm: 0.8125rem;   /* 13px: nav, chips, tags, footer, data           */
+  --fs-mono-md: 0.875rem;    /* 14px: rail, buttons, years                     */
+  --fs-sm: 0.9375rem;        /* 15px: captions, notes, secondary prose         */
   --fs-base: 1.0625rem;      /* 17px: body                                     */
   --fs-lead: 1.1875rem;      /* 19px: the answer block                         */
 
-  --bg: #ffffff;
-  --bg-soft: #f6f8fa;
+  /* ---- Catppuccin Latte, light ---------------------------------------- */
+  --bg: #eff1f5;             /* base                                          */
+  --bg-soft: #e6e9ef;        /* mantle                                        */
   --bg-raised: #ffffff;
-  --fg: #1f2328;
-  --fg-muted: #59636e;
-  /* was #818b98, 3.4:1 on white, which fails WCAG AA at the 11-13px sizes this
-     variable serves. #656d76 is 5.2:1. */
-  --fg-faint: #656d76;
-  --accent: #0969da;
-  --accent-soft: rgba(9, 105, 218, 0.09);
-  /* text on a filled accent button: white fails on the dark-mode accent */
-  --on-accent: #ffffff;
-  --border: #d1d9e0;
-  --border-soft: #e4e8ed;
-  --shadow-card: 0 1px 2px rgba(31, 35, 40, 0.05);
-  --shadow-card-hover: 0 2px 10px rgba(9, 105, 218, 0.10);
+  --bg-sunk: #dce0e8;        /* crust                                         */
+  --fg: #4c4f69;             /* text          7.06 on base                    */
+  --fg-muted: #5c5f77;       /* subtext1      5.53                            */
+  --fg-faint: #63667c;       /* between subtext0 and subtext1, 4.85           */
+  --accent: #1a53c4;         /* blue darkened from #1e66f5 (4.34) to 6.03     */
+  --accent-2: #4557c4;       /* lavender darkened from #7287fd (2.81) to 5.85 */
+  --accent-3: #a83f05;       /* peach darkened from #fe640b (2.64) to 5.30    */
+  /* green, darkened from Latte's #40a02b (2.96) far enough to clear AA on the
+     soft background too — it labels the outcome block inside a secondary card,
+     which is the darkest surface it lands on */
+  --ok: #2b7019;             /* 5.41 on base, 5.03 on soft                    */
+  --accent-soft: rgba(26, 83, 196, 0.08);
+  --accent-2-soft: rgba(69, 87, 196, 0.10);
+  --on-accent: #ffffff;      /* 6.82 on --accent                              */
+  --border: #bcc0cc;         /* surface1                                      */
+  --border-soft: #ccd0da;    /* surface0                                      */
+  --shadow-card: 0 1px 2px rgba(76, 79, 105, 0.06);
+  --shadow-card-hover: 0 3px 14px rgba(26, 83, 196, 0.13);
 
-  /* rem, not ch: the footer and nav are monospace, and a ch measure would give
-     them a different column width than the proportional body text. */
-  --measure: 40rem;
-  --wide: 56rem;
+  --frame: 58rem;
+  --measure: 42rem;
   --pad: 1.25rem;
 }
 
+/* ---- Catppuccin Mocha, dark ------------------------------------------- */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0d1117;
-    --bg-soft: #161b22;
-    --bg-raised: #151b23;
-    --fg: #e6edf3;
-    --fg-muted: #9fb0c0;
-    --fg-faint: #8b98a5;
-    --accent: #58a6ff;
-    --accent-soft: rgba(88, 166, 255, 0.13);
-    --on-accent: #0d1117;
-    --border: #3d444d;
-    --border-soft: #262c34;
+    --bg: #1e1e2e;           /* base                                          */
+    --bg-soft: #181825;      /* mantle                                        */
+    --bg-raised: #232336;    /* between base and surface0                     */
+    --bg-sunk: #11111b;      /* crust                                         */
+    --fg: #cdd6f4;           /* text         11.34 on base                    */
+    --fg-muted: #a6adc8;     /* subtext0      7.37                            */
+    --fg-faint: #9399b2;     /* overlay2      5.81                            */
+    --accent: #89b4fa;       /* blue          7.79                            */
+    --accent-2: #b4befe;     /* lavender      9.17                            */
+    --accent-3: #fab387;     /* peach         9.27                            */
+    --ok: #a6e3a1;           /* green        11.03                            */
+    --accent-soft: rgba(137, 180, 250, 0.13);
+    --accent-2-soft: rgba(180, 190, 254, 0.12);
+    --on-accent: #1e1e2e;    /* 7.79 on --accent                              */
+    --border: #45475a;       /* surface1                                      */
+    --border-soft: #313244;  /* surface0                                      */
     --shadow-card: none;
-    --shadow-card-hover: 0 2px 12px rgba(88, 166, 255, 0.12);
+    --shadow-card-hover: 0 3px 16px rgba(137, 180, 250, 0.14);
   }
 }
 
@@ -96,24 +117,26 @@ body {
   :root { --pad: 2rem; }
 }
 
-/* ---- the two-width column -------------------------------------------- */
+/* ---- the frame -------------------------------------------------------- */
 
+/* Three tracks: a narrow reading measure in the middle, flanked by the two
+   strips that make up the difference. `wide` spans all three, `text` only the
+   middle. The home page is entirely `wide`; a case study is entirely `text`
+   except its tables. Nothing straddles, so no element is left half-aligned. */
 main, footer {
-  max-width: var(--wide);
+  max-width: var(--frame);
   margin: 0 auto;
 }
-
-/* Prose runs in the narrow measure, flush to the shared left edge. The selectors
-   listed below mark the figures, which take the full frame. */
-main > * { max-width: var(--measure); }
-main > .topnav,
-main > .breadcrumb,
-main > .hero,
-main > h2,
-main > .metrics,
-main > .grid,
-main > .chips,
-main > .table-wrap { max-width: none; }
+main {
+  display: grid;
+  grid-template-columns:
+    [wide-start] minmax(0, calc((var(--frame) - var(--measure)) / 2))
+    [text-start] minmax(0, var(--measure)) [text-end]
+    minmax(0, calc((var(--frame) - var(--measure)) / 2)) [wide-end];
+}
+main > * { grid-column: wide; min-width: 0; }
+main.article > * { grid-column: text; }
+main.article > .table-wrap { grid-column: wide; }
 
 ::selection { background: var(--accent-soft); }
 
@@ -134,7 +157,7 @@ a:hover { text-decoration: underline; }
   border-radius: 6px;
 }
 
-/* ---- nav ------------------------------------------------------------- */
+/* ---- nav -------------------------------------------------------------- */
 
 .topnav {
   position: sticky;
@@ -155,112 +178,146 @@ a:hover { text-decoration: underline; }
   gap: 0.25rem 1.15rem;
 }
 .topnav .brand { color: var(--fg-faint); margin-right: auto; }
-.topnav .brand::before { content: "~/"; color: var(--accent); }
+.topnav .brand::before { content: "~/"; color: var(--accent-2); }
 .topnav a { color: var(--fg-muted); }
-.topnav a::before { content: "#"; color: var(--accent); opacity: 0.7; }
+.topnav a::before { content: "#"; color: var(--accent-2); opacity: 0.8; }
 .topnav a:hover { color: var(--accent); text-decoration: none; }
 
-/* ---- hero ------------------------------------------------------------ */
+/* ---- hero ------------------------------------------------------------- */
 
+/* Two columns that between them fill the frame. The old hero capped its text at
+   46rem and pushed the mark right with margin-left:auto, which opened a dead
+   gutter down the middle at desktop width. */
 .hero {
-  display: flex;
-  align-items: center;
-  gap: 1.75rem;
-  margin: 3rem 0 1.75rem;
+  display: grid;
+  gap: 1.75rem 2.75rem;
+  margin: 2.75rem 0 2.25rem;
+  align-items: start;
 }
-.hero-text {
-  border-left: 4px solid var(--accent);
-  padding-left: 1.15rem;
-  min-width: 0;
-  max-width: 46rem;
+@media (min-width: 54rem) {
+  .hero { grid-template-columns: minmax(0, 1fr) 14rem; }
 }
-.hero-mark { flex: 0 0 auto; order: 2; margin-left: auto; }
 
-.mark .spokes { stroke: var(--accent); opacity: 0.5; }
-.mark .nodes { stroke: var(--accent); fill: var(--bg); }
-.mark .hub { stroke: var(--accent); fill: var(--bg); }
-.mark .core { fill: var(--accent); }
+.hero-id { min-width: 0; }
 
 h1 {
-  font-size: clamp(2.05rem, 5.5vw, 2.85rem);
-  line-height: 1.08;
-  letter-spacing: -0.021em;
+  font-size: clamp(2.1rem, 5.5vw, 3rem);
+  line-height: 1.06;
+  letter-spacing: -0.022em;
   text-wrap: balance;
-  margin: 0 0 0.35rem;
+  margin: 0 0 0.3rem;
 }
-/* scoped: .role is also a career-table cell, which this rule used to enlarge */
 .hero .role {
-  font-size: 1.125rem;
+  font-size: 1.1875rem;
   color: var(--fg-muted);
   text-wrap: balance;
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.7rem;
 }
 .rail {
   font-family: var(--mono);
   font-size: var(--fs-mono-md);
   font-weight: 600;
-  color: var(--accent);
+  color: var(--accent-2);
   letter-spacing: 0.01em;
   text-wrap: balance;
-  margin: 0 0 0.35rem;
+  margin: 0 0 1.15rem;
+  padding-bottom: 1.15rem;
+  border-bottom: 1px solid var(--border-soft);
 }
-.stamp {
-  font-family: var(--mono);
-  font-size: var(--fs-mono-sm);
-  line-height: 1.55;
-  color: var(--fg-faint);
-  letter-spacing: 0.01em;
-  text-wrap: pretty;
-  margin: 0;
-}
-.rail i, .stamp i, .fine i { font-style: normal; opacity: 0.5; padding: 0 0.15em; }
+.rail i, .stamp i, .fine i, .quote i { font-style: normal; opacity: 0.45; padding: 0 0.15em; }
 .rail span, .stamp span { white-space: nowrap; }
-
-@media (max-width: 46rem) {
-  .hero { gap: 1.1rem; margin-top: 2.25rem; }
-  .hero-mark { display: none; }
-}
 
 .answer {
   font-size: var(--fs-lead);
-  line-height: 1.58;
+  line-height: 1.55;
   text-wrap: pretty;
-  margin: 0 0 1.5rem;
+  margin: 0 0 1.4rem;
 }
 
-/* ---- buttons --------------------------------------------------------- */
+/* ---- hero side: portrait and the facts a recruiter checks first -------- */
 
-.cta { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 2.25rem; }
+.hero-side {
+  display: grid;
+  gap: 1.1rem;
+  min-width: 0;
+}
+/* Fixed square frame. A photograph dropped in at the same path inherits it
+   without a layout change, which is the point of the frame existing. */
+.portrait {
+  display: block;
+  width: 100%;
+  max-width: 14rem;
+  aspect-ratio: 1;
+  height: auto;
+  border-radius: 14px;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-soft);
+}
+.portrait.photo { object-fit: cover; }
+
+.at-a-glance {
+  font-family: var(--mono);
+  font-size: var(--fs-mono-sm);
+  line-height: 1.5;
+  margin: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+.at-a-glance dt {
+  color: var(--accent-2);
+  text-transform: uppercase;
+  font-size: var(--fs-mono-xs);
+  letter-spacing: 0.1em;
+}
+.at-a-glance dd {
+  margin: 0.1rem 0 0;
+  color: var(--fg-muted);
+  text-wrap: pretty;
+}
+
+@media (max-width: 54rem) {
+  .hero { margin-top: 2rem; }
+  .hero-side {
+    grid-template-columns: 8rem minmax(0, 1fr);
+    align-items: start;
+    gap: 1.25rem;
+  }
+  .portrait { max-width: 8rem; }
+}
+
+/* ---- buttons ---------------------------------------------------------- */
+
+.cta { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; }
 .btn {
   display: inline-flex;
   align-items: center;
-  min-height: 2.25rem;
+  min-height: 2.35rem;
   font-family: var(--mono);
   font-size: var(--fs-mono-sm);
-  padding: 0.3rem 0.95rem;
+  padding: 0.3rem 1rem;
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 7px;
   background: var(--bg-soft);
   color: var(--fg);
-  transition: border-color 0.15s ease, color 0.15s ease;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
 }
 .btn:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
 .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
 .btn.primary:hover { filter: brightness(1.08); color: var(--on-accent); }
 
-/* ---- metrics --------------------------------------------------------- */
+/* ---- metrics ---------------------------------------------------------- */
 
-/* A 1px gap over a border-coloured background draws the dividers in both axes.
-   The old border-right-per-cell rule left the wrapped row with no rule above. */
+/* A 1px gap over a border-coloured background draws the dividers in both axes,
+   so a wrapped row still gets a rule above it. */
 .metrics {
   list-style: none;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1px;
-  margin: 0 0 0.6rem;
+  margin: 0 0 1rem;
   padding: 0;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
   background: var(--border-soft);
 }
@@ -268,44 +325,65 @@ h1 {
   .metrics { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 .metrics li {
-  padding: 0.9rem 1rem;
+  padding: 1rem 1.1rem;
   margin: 0;
   background: var(--bg-soft);
+  /* the four labels are different lengths; anchoring the figure to the top and
+     the label to the bottom keeps the baselines level when one of them wraps */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.3rem;
 }
 .metrics .value {
   display: block;
   font-family: var(--mono);
   font-variant-numeric: tabular-nums lining-nums;
-  font-size: 1.35rem;
+  font-size: 1.4rem;
   font-weight: 600;
-  letter-spacing: -0.01em;
-  line-height: 1.25;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
   color: var(--fg);
+}
+/* the glyph that says what the figure is, so the label does not have to */
+.metrics .unit {
+  color: var(--accent-3);
+  font-size: 1.05rem;
+  margin-left: 0.28em;
+  vertical-align: 0.02em;
 }
 .metrics .label {
   display: block;
   font-size: var(--fs-sm);
-  line-height: 1.4;
+  line-height: 1.35;
   text-wrap: pretty;
   color: var(--fg-muted);
-  margin-top: 0.25rem;
 }
 
-/* ---- headings -------------------------------------------------------- */
+/* keyword rail under the figures: the literal vocabulary a sourcing tool matches */
+.stamp {
+  font-family: var(--mono);
+  font-size: var(--fs-mono-sm);
+  line-height: 1.7;
+  color: var(--fg-faint);
+  letter-spacing: 0.01em;
+  text-wrap: pretty;
+  margin: 0 0 0.5rem;
+}
+
+/* ---- headings --------------------------------------------------------- */
 
 h2 {
-  position: relative;
-  font-size: 1.45rem;
+  font-size: 1.5rem;
   line-height: 1.25;
-  letter-spacing: -0.014em;
-  margin: 3.25rem 0 1rem;
-  padding-bottom: 0.45rem;
+  letter-spacing: -0.016em;
+  margin: 3.5rem 0 1.15rem;
+  padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--border-soft);
 }
 h2 .hash {
   font-family: var(--mono);
-  color: var(--accent);
-  opacity: 0.75;
+  color: var(--accent-2);
   margin-right: 0.45rem;
   font-weight: 500;
 }
@@ -316,6 +394,15 @@ h3 {
   margin: 2rem 0 0.4rem;
 }
 h3 + p { margin-top: 0; }
+h3.sub {
+  font-family: var(--mono);
+  font-size: var(--fs-mono-xs);
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+  font-weight: 600;
+  margin: 2.5rem 0 0.9rem;
+}
 
 .anchor {
   font-family: var(--mono);
@@ -328,23 +415,38 @@ h2:hover .anchor, h3:hover .anchor, .anchor:focus-visible { opacity: 1; }
 
 p { margin: 0 0 1.1rem; text-wrap: pretty; }
 
-/* ---- cards ----------------------------------------------------------- */
+.section-note {
+  color: var(--fg-muted);
+  font-size: var(--fs-sm);
+  margin: -0.35rem 0 1.3rem;
+}
 
-/* Fixed track counts rather than auto-fit: there are three case studies, and
-   auto-fit at this frame width left the third one alone in a two-up row. */
+/* ---- Now: two columns, so the section fills the frame like the rest ---- */
+
+.prose { display: grid; gap: 0 2.5rem; }
+@media (min-width: 52rem) {
+  .prose { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.prose p:last-child { margin-bottom: 0; }
+
+/* ---- cards ------------------------------------------------------------ */
+
 .grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 1rem;
   margin-bottom: 1rem;
 }
-@media (min-width: 60rem) {
-  .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (min-width: 46rem) {
+  .grid.lead-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 62rem) {
+  .grid.second-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 .card {
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.1rem 1.2rem 1rem;
+  border-radius: 12px;
+  padding: 1.2rem 1.3rem 1.1rem;
   background: var(--bg-raised);
   box-shadow: var(--shadow-card);
   display: flex;
@@ -352,18 +454,26 @@ p { margin: 0 0 1.1rem; text-wrap: pretty; }
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 .card:hover { border-color: var(--accent); box-shadow: var(--shadow-card-hover); }
-.card.wide { grid-column: 1 / -1; }
-.card.wide .card-desc, .card.wide .chips { max-width: var(--measure); }
+
+/* The two client engagements carry the pitch; the doctrine piece and the
+   open-source work sit below at a lower weight rather than as their peers. */
+.card.lead { border-color: var(--border); }
+.card.lead h3 { font-size: 1.15rem; }
+.card.lead .card-desc { font-size: 1rem; }
+.card.secondary { background: var(--bg-soft); }
+.card.secondary h3 { font-size: 0.98rem; }
+
 .kicker {
   font-family: var(--mono);
   font-size: var(--fs-mono-xs);
   letter-spacing: 0.11em;
   text-transform: uppercase;
   color: var(--fg-faint);
-  margin: 0 0 0.45rem;
+  margin: 0 0 0.5rem;
 }
-.card h3 { margin: 0 0 0.5rem; font-size: 1.02rem; line-height: 1.3; }
-.card-desc { font-size: 0.9375rem; line-height: 1.5; color: var(--fg-muted); margin: 0 0 0.8rem; }
+.card.lead .kicker { color: var(--accent-2); }
+.card h3 { margin: 0 0 0.55rem; font-size: 1.02rem; line-height: 1.3; }
+.card-desc { font-size: var(--fs-sm); line-height: 1.5; color: var(--fg-muted); margin: 0 0 0.85rem; }
 
 /* The label sits on its own line. Inline, the wrapped text ran back underneath
    it; as a grid column it left a dead gutter down the side of a narrow card. */
@@ -373,16 +483,17 @@ p { margin: 0 0 1.1rem; text-wrap: pretty; }
   line-height: 1.55;
   color: var(--fg);
   background: var(--accent-soft);
-  border-radius: 6px;
-  padding: 0.5rem 0.7rem;
-  margin: 0 0 0.8rem;
+  border-left: 2px solid var(--ok);
+  border-radius: 0 7px 7px 0;
+  padding: 0.55rem 0.75rem;
+  margin: 0 0 0.85rem;
 }
 .outcome span {
   display: block;
   text-transform: uppercase;
   letter-spacing: 0.09em;
   font-size: var(--fs-mono-xs);
-  color: var(--accent);
+  color: var(--ok);
   margin-bottom: 0.15rem;
 }
 .card-links {
@@ -396,7 +507,204 @@ p { margin: 0 0 1.1rem; text-wrap: pretty; }
 }
 .card-links a::after { content: " →"; }
 
-/* ---- chips ----------------------------------------------------------- */
+.collaborators { margin-top: 0.4rem; }
+
+/* ---- career timeline -------------------------------------------------- */
+
+/* Replaces a four-column table that ran five type treatments in a single row.
+   Two here: monospace for figures, the proportional face for names and prose.
+   `weight` decides how much room an entry gets, so growing scope is visible
+   rather than merely readable. */
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.entry {
+  display: grid;
+  gap: 0.15rem 1.75rem;
+  padding: 1.15rem 0 1.15rem 1.4rem;
+  margin: 0;
+  border-left: 2px solid var(--border-soft);
+  position: relative;
+}
+@media (min-width: 46rem) {
+  .entry { grid-template-columns: 7.5rem minmax(0, 1fr); }
+}
+/* the node on the spine */
+.entry::before {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 1.55rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--border);
+}
+.entry.lead { border-left-color: var(--accent-2); }
+.entry.lead::before { border-color: var(--accent-2); background: var(--accent-2); }
+.entry.compact { padding-top: 0.7rem; padding-bottom: 0.7rem; }
+.entry.compact::before { top: 1.1rem; }
+
+.entry .years {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-size: var(--fs-mono-md);
+  color: var(--fg-faint);
+  white-space: nowrap;
+  margin: 0;
+  padding-top: 0.15rem;
+}
+.entry.lead .years { color: var(--accent-2); font-weight: 600; }
+
+.entry-body { min-width: 0; }
+.entry .org {
+  font-size: 1.0625rem;
+  font-weight: 650;
+  line-height: 1.3;
+  letter-spacing: -0.008em;
+  margin: 0;
+}
+.entry.lead .org { font-size: 1.2rem; }
+.entry.compact .org { font-size: 0.9875rem; font-weight: 600; }
+.entry .role {
+  font-size: var(--fs-sm);
+  color: var(--fg-muted);
+  line-height: 1.45;
+  margin: 0.1rem 0 0;
+}
+.entry .note {
+  font-size: var(--fs-sm);
+  color: var(--fg-muted);
+  line-height: 1.5;
+  text-wrap: pretty;
+  margin: 0.45rem 0 0;
+}
+.entry .scope {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-size: var(--fs-mono-sm);
+  line-height: 1.55;
+  color: var(--fg-faint);
+  text-wrap: pretty;
+  margin: 0.45rem 0 0;
+}
+.entry.compact .role, .entry.compact .scope { margin-top: 0.05rem; }
+
+/* ---- speaking --------------------------------------------------------- */
+
+.speaking { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.9rem; }
+@media (min-width: 46rem) {
+  .speaking { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+.speaking li {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+}
+.speaking .what { font-size: var(--fs-sm); font-weight: 600; line-height: 1.4; margin: 0; }
+.speaking .where {
+  font-family: var(--mono);
+  font-size: var(--fs-mono-sm);
+  color: var(--accent-2);
+  margin: 0.3rem 0 0;
+}
+.speaking .note {
+  font-size: var(--fs-sm);
+  color: var(--fg-muted);
+  line-height: 1.45;
+  margin: 0.45rem 0 0;
+}
+
+/* ---- recommendations -------------------------------------------------- */
+
+.quotes { display: grid; gap: 1rem; }
+@media (min-width: 52rem) {
+  .quotes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.quote {
+  margin: 0;
+  padding: 1.15rem 1.25rem 1rem;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+}
+.quote blockquote { margin: 0; }
+.quote blockquote p {
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+  color: var(--fg);
+  text-wrap: pretty;
+  margin: 0;
+}
+.quote blockquote p::before { content: "“"; color: var(--accent-2); }
+.quote blockquote p::after { content: "”"; color: var(--accent-2); }
+.quote figcaption {
+  font-family: var(--mono);
+  font-size: var(--fs-mono-sm);
+  line-height: 1.45;
+  margin: auto 0 0;
+  padding-top: 0.85rem;
+  color: var(--fg-faint);
+}
+.quote figcaption b { display: block; color: var(--fg); font-weight: 600; }
+.quote figcaption span { display: block; text-wrap: pretty; }
+
+/* ---- how I work ------------------------------------------------------- */
+
+.principles {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1.35rem 2.5rem;
+}
+@media (min-width: 52rem) {
+  .principles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.principles li {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 2.4rem minmax(0, 1fr);
+  gap: 0 0.5rem;
+}
+.principles .count {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-size: var(--fs-mono-md);
+  font-weight: 600;
+  color: var(--accent-2);
+  margin: 0;
+  padding-top: 0.15rem;
+}
+.principles h3 { margin: 0 0 0.25rem; font-size: 1.0625rem; }
+.principles p {
+  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+  color: var(--fg-muted);
+}
+
+/* ---- domain focus ----------------------------------------------------- */
+
+/* Thirty-one terms in one undifferentiated wall read as keyword stuffing to a
+   human, whatever they do for a machine. Same terms, grouped, with the group
+   name in the label column the FAQ and the timeline also use. */
+.focus { display: grid; gap: 1.1rem; }
+.focus-group { display: grid; gap: 0.35rem 1.75rem; }
+@media (min-width: 46rem) {
+  .focus-group { grid-template-columns: 11rem minmax(0, 1fr); align-items: start; }
+}
+.focus-group .kicker { margin: 0.25rem 0 0; color: var(--accent-2); }
+.focus-group + .focus-group { padding-top: 1.1rem; border-top: 1px solid var(--border-soft); }
+
+/* ---- chips ------------------------------------------------------------ */
 
 .chips {
   list-style: none;
@@ -406,6 +714,7 @@ p { margin: 0 0 1.1rem; text-wrap: pretty; }
   padding: 0;
   margin: 0 0 0.8rem;
 }
+.focus .chips { margin: 0; }
 .chips li {
   font-family: var(--mono);
   font-size: var(--fs-mono-sm);
@@ -413,127 +722,83 @@ p { margin: 0 0 1.1rem; text-wrap: pretty; }
   color: var(--fg-muted);
   background: var(--bg-soft);
   border: 1px solid var(--border-soft);
-  border-radius: 5px;
-  padding: 0.1rem 0.5rem;
+  border-radius: 6px;
+  padding: 0.12rem 0.55rem;
   margin: 0;
 }
 
-/* ---- tables ---------------------------------------------------------- */
+/* ---- questions -------------------------------------------------------- */
 
-/* The wrapper still scrolls, because a markdown table in a case study can be
-   any shape. The two local gradients fade in only when content sits off-screen
-   in that direction, so a table that fits shows nothing. */
-.table-wrap {
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  margin: 0 0 1.2rem;
-  background:
-    linear-gradient(to right, var(--bg) 40%, transparent) 0 0 / 2.5rem 100% no-repeat local,
-    linear-gradient(to left, var(--bg) 40%, transparent) 100% 0 / 2.5rem 100% no-repeat local,
-    radial-gradient(farthest-side at 0 50%, var(--border), transparent) 0 0 / 0.6rem 100% no-repeat scroll,
-    radial-gradient(farthest-side at 100% 50%, var(--border), transparent) 100% 0 / 0.6rem 100% no-repeat scroll;
-}
-table {
-  border-collapse: collapse;
-  width: 100%;
-  font-size: 0.9375rem;
-  line-height: 1.5;
-}
-th, td {
-  border: 1px solid var(--border-soft);
-  padding: 0.55rem 0.75rem;
-  text-align: left;
-  vertical-align: top;
-}
-th {
-  background: var(--bg-soft);
-  font-family: var(--mono);
-  font-size: var(--fs-mono-xs);
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
-  font-weight: 600;
-}
-
-/* ---- career ---------------------------------------------------------- */
-
-/* Wide: a real four-column table with widths that hold, and a Scope column
-   that wraps instead of forcing the whole table into a scroll container. */
-.career-wrap { overflow-x: visible; background: none; }
-table.career { table-layout: fixed; }
-table.career td { border-left: 0; border-right: 0; }
-table.career th:nth-child(1), table.career td:nth-child(1) { width: 6rem; }
-table.career th:nth-child(2), table.career td:nth-child(2) { width: 11rem; }
-table.career th:nth-child(3), table.career td:nth-child(3) { width: 13rem; }
-table.career .org, table.career .role { line-height: 1.45; text-wrap: pretty; }
-table.career .years {
-  font-family: var(--mono);
-  font-variant-numeric: tabular-nums lining-nums;
-  font-size: var(--fs-mono-sm);
-  color: var(--fg-muted);
-  white-space: nowrap;
-}
-table.career .note {
-  display: block;
-  font-size: var(--fs-sm);
-  line-height: 1.45;
-  color: var(--fg-muted);
+/* The question in the label column, the answer beside it. As seven bare h3+p
+   pairs this was the longest section on the page and the least designed. */
+.qa { margin: 0; display: grid; gap: 0; }
+.qa dt {
+  font-weight: 650;
+  line-height: 1.4;
+  letter-spacing: -0.006em;
   text-wrap: pretty;
-  margin-bottom: 0.3rem;
 }
-table.career .scope-line {
-  display: block;
-  font-family: var(--mono);
-  font-variant-numeric: tabular-nums lining-nums;
-  font-size: var(--fs-mono-sm);
-  line-height: 1.55;
+.qa dd {
+  margin: 0.4rem 0 0;
   color: var(--fg-muted);
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+.qa dt + dd { padding-bottom: 1.35rem; }
+.qa dd + dt { padding-top: 1.35rem; border-top: 1px solid var(--border-soft); }
+@media (min-width: 52rem) {
+  /* The rule is drawn per cell, so the gutter has to be padding inside the
+     first column rather than a column-gap: with a gap, the two borders stop
+     short of each other and the rule reads as broken across the middle. */
+  .qa { grid-template-columns: 17.5rem minmax(0, 1fr); column-gap: 0; }
+  .qa dt { grid-column: 1; padding-right: 2.5rem; }
+  .qa dd { grid-column: 2; margin-top: 0; }
+  .qa dd + dt, .qa dt + dd:not(:first-of-type) { border-top: 1px solid var(--border-soft); }
+  .qa dt, .qa dd { padding-top: 1.35rem; padding-bottom: 1.35rem; }
+  .qa dt:first-of-type, .qa dt:first-of-type + dd { padding-top: 0; border-top: 0; }
 }
 
-/* Narrow: the same rows as stacked entries. A four-column CV in 390px gives you
-   a horizontal scrollbar and one word per line. */
-@media (max-width: 60rem) {
-  table.career, table.career tbody, table.career tr, table.career td { display: block; width: auto; }
-  table.career thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
-  table.career tr {
-    border-top: 1px solid var(--border-soft);
-    padding: 0.9rem 0 1rem;
-  }
-  table.career tr:first-child { border-top: 0; }
-  table.career td { border: 0; padding: 0; }
-  table.career td:not(:last-child) { margin-bottom: 0.3rem; }
-  table.career .years {
-    color: var(--accent);
-    font-weight: 600;
-    letter-spacing: 0.02em;
-  }
-}
-
-/* ---- prose ----------------------------------------------------------- */
+/* ---- prose ------------------------------------------------------------ */
 
 ul { padding-left: 1.2rem; }
 li { margin-bottom: 0.4rem; }
 
-ul.colophon { list-style: none; padding: 0; }
+/* Multi-column rather than a two-track grid: the points are very different
+   lengths, and a grid row sizes to its tallest cell, which left holes down the
+   short side. Columns pack against each other and keep the DOM order. */
+ul.colophon { list-style: none; padding: 0; margin: 0; }
+@media (min-width: 52rem) {
+  ul.colophon { columns: 2; column-gap: 2.5rem; }
+}
 ul.colophon li {
   position: relative;
-  padding-left: 1.6rem;
-  font-size: 0.9375rem;
+  padding-left: 1.5rem;
+  font-size: var(--fs-sm);
+  line-height: 1.55;
   color: var(--fg-muted);
-  margin-bottom: 0.5rem;
+  margin: 0 0 0.6rem;
+  break-inside: avoid;
 }
 ul.colophon li::before {
   content: "▸";
   position: absolute;
-  left: 0.35rem;
-  color: var(--accent);
+  left: 0.25rem;
+  color: var(--accent-2);
   font-family: var(--mono);
+}
+
+.updated {
+  font-family: var(--mono);
+  font-size: var(--fs-mono-sm);
+  color: var(--fg-faint);
+  margin: 1.5rem 0 0;
 }
 
 code {
   background: var(--bg-soft);
   border: 1px solid var(--border-soft);
-  border-radius: 4px;
+  border-radius: 5px;
   padding: 0.08rem 0.32rem;
   font-family: var(--mono);
   font-size: 0.86em;
@@ -562,6 +827,43 @@ main > p:has(> em:only-child) {
 }
 main > p > em:only-child { font-style: italic; color: var(--fg-muted); }
 
+/* ---- tables (case studies) -------------------------------------------- */
+
+/* A markdown table in a case study can be any shape, so the wrapper scrolls.
+   The two local gradients fade in only when content sits off-screen in that
+   direction, so a table that fits shows nothing. */
+.table-wrap {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  margin: 0 0 1.2rem;
+  background:
+    linear-gradient(to right, var(--bg) 40%, transparent) 0 0 / 2.5rem 100% no-repeat local,
+    linear-gradient(to left, var(--bg) 40%, transparent) 100% 0 / 2.5rem 100% no-repeat local,
+    radial-gradient(farthest-side at 0 50%, var(--border), transparent) 0 0 / 0.6rem 100% no-repeat scroll,
+    radial-gradient(farthest-side at 100% 50%, var(--border), transparent) 100% 0 / 0.6rem 100% no-repeat scroll;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+}
+th, td {
+  border: 1px solid var(--border-soft);
+  padding: 0.55rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+th {
+  background: var(--bg-soft);
+  font-family: var(--mono);
+  font-size: var(--fs-mono-xs);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  font-weight: 600;
+}
+
 footer {
   margin-top: 4rem;
   padding-top: 1.3rem;
@@ -573,29 +875,67 @@ footer {
 }
 footer p { margin-bottom: 0.45rem; }
 
-/* ---- print: a clean CV ----------------------------------------------- */
+/* ---- print: a clean CV ------------------------------------------------ */
 
 @media print {
   :root {
-    --bg: #fff; --bg-soft: #fff; --bg-raised: #fff;
+    --bg: #fff; --bg-soft: #fff; --bg-raised: #fff; --bg-sunk: #fff;
     --fg: #000; --fg-muted: #333; --fg-faint: #555;
-    --accent: #000; --accent-soft: #f2f2f2;
+    --accent: #000; --accent-2: #000; --accent-3: #000; --ok: #000;
+    --accent-soft: #f2f2f2; --accent-2-soft: #f2f2f2;
     --border: #999; --border-soft: #ccc;
     --shadow-card: none; --shadow-card-hover: none;
   }
-  body { font-size: 10.5pt; padding: 0; }
-  main, footer, main > * { max-width: none; }
-  .topnav, .cta, .hero-mark, .anchor, .card-links { display: none; }
-  .hero { margin-top: 0; }
-  h2 { margin-top: 1.4rem; page-break-after: avoid; }
-  .card, .metrics, table, table.career tr { page-break-inside: avoid; }
-  .grid { grid-template-columns: 1fr; }
+  /* body had a 5rem bottom padding for the screen, which on paper was enough to
+     push the footer onto a sheet of its own */
+  body { font-size: 10pt; padding: 0; }
+  main, footer { max-width: none; }
+  main { display: block; }
+  footer { margin-top: 1.5rem; padding-top: 0.8rem; }
+  main > *:last-child { margin-bottom: 0; }
+
+  /* Paper gets the CV, not a transcript of the web page. What is dropped is the
+     web furniture — navigation, the testimonials, the questions block and the
+     colophon about how the page is built — none of which belongs on a document
+     someone prints to read on a train. Everything a CV is actually for stays. */
+  .topnav, .cta, .anchor, .card-links, .updated, .section-note, .portrait,
+  #voices, .quotes, #faq, .qa, #colophon, ul.colophon, .collaborators {
+    display: none;
+  }
+
+  .hero { display: grid; grid-template-columns: minmax(0, 1fr) 15rem; margin-top: 0; }
+  .at-a-glance { display: block; }
+  .at-a-glance dt { margin-top: 0.35rem; }
+  h2 { margin-top: 1.2rem; page-break-after: avoid; }
+  /* `.card` is deliberately NOT in this list. A work card is tall enough that
+     refusing to break it strands a third of a sheet above it; the short blocks
+     are the ones worth keeping whole. */
+  .metrics, table, .entry, .principles li, .speaking li { page-break-inside: avoid; }
+  .card-desc, .outcome { font-size: 9pt; }
+  .chips li { font-size: 8pt; }
+
+  /* A print sheet is about 46rem wide, so every `min-width: 52rem` rule above
+     misses and the page falls back to one column per block — which is what made
+     the printed version six pages. Restate the multi-column layouts here. */
+  .prose, .principles, .quotes, .grid.second-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .speaking { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .focus-group { grid-template-columns: 9rem minmax(0, 1fr); }
+  .entry { padding: 0.5rem 0 0.5rem 1rem; }
+  .entry .note, .entry .scope { margin-top: 0.2rem; }
+  .principles { gap: 0.7rem 1.5rem; }
+
+  /* Card tags are a scanning aid for a screen; on paper the description already
+     says it, and five chips per card cost most of a page across four cards. */
+  .card .chips { display: none; }
+  h1 { font-size: 21pt; }
+  h2 { font-size: 12.5pt; }
+  .hero .role { font-size: 11pt; }
+  .answer { font-size: 10.5pt; }
+  .rail { margin-bottom: 0.6rem; padding-bottom: 0.6rem; }
+  .entry { border-left: 0; padding-left: 0; }
+  .entry::before { display: none; }
+  .qa dt { margin-top: 0.6rem; }
   .table-wrap { background: none; overflow: visible; }
-  /* paper is a narrow column, so print takes the stacked layout */
-  table.career, table.career tbody, table.career tr, table.career td { display: block; width: auto; }
-  table.career thead { display: none; }
-  table.career tr { border-top: 1px solid #ccc; padding: 0.5rem 0; }
-  table.career td { border: 0; padding: 0; }
   a { color: #000; text-decoration: underline; }
   a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 8pt; color: #555; }
 }

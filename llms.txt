@@ -14,6 +14,21 @@ Based in Frankfurt am Main, Germany. Languages: German, English. Open to: Princi
 
 - [ai-workbench](https://github.com/maurice-jobst/ai-workbench): A file-first system for running product-management work with an AI agent: markdown as state, deterministic checks, and a verification culture borrowed from compliance work.
 
+## How he works
+
+- **AI at the edges, deterministic core** — Agents draft, triage and summarize. Anything that has to be reproducible — a converge, a deploy, a secret — stays a script. This page is the argument applied to itself: an agent wrote it, and a stdlib generator renders it.
+- **The operating model before the app** — A platform at 1.6 stars is rarely a UI problem. Fix who decides, who is accountable and what the SLA actually measures, and the release notes start writing themselves.
+- **Regulation becomes testable properties** — An obligation that cannot be tested has not been implemented, it has been promised. I take the statute apart until each clause is a property with a pass or fail, and I decide the ambiguities in writing before anyone builds against them.
+- **Claims carry their evidence** — A number on this page can be checked. In the open-source work the same rule is machine-enforced: sources cited, load-bearing claims put to refute-prompted votes, and the claims that failed published alongside the ones that passed.
+
+## Domain focus
+
+- **Payments**: European Payments Initiative (EPI), Wero, PSD2, PSD3, Payment Services Regulation (PSR), Instant Payments Regulation, Verification of Payee, digital euro, SEPA, account-centric transit ticketing
+- **AI governance**: EU AI Act, Article 14 human oversight, ISO/IEC 42001, AI governance
+- **Financial regulation**: DORA (Digital Operational Resilience Act), MaRisk, BAIT, BaFin supervision, KWG, MiFID II
+- **Leadership and delivery**: product management, program management, people leadership, vendor and partner governance
+- **Systems and resilience**: KRITIS, NIS2, core banking, public-sector mobility, regulated cloud delivery, GitOps, Infrastructure as Code
+
 ## Profiles
 
 - https://www.linkedin.com/in/mauricejobst/
