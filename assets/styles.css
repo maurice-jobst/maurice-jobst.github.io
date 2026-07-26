@@ -44,7 +44,6 @@
   --bg: #eff1f5;             /* base                                          */
   --bg-soft: #e6e9ef;        /* mantle                                        */
   --bg-raised: #ffffff;
-  --bg-sunk: #dce0e8;        /* crust                                         */
   --fg: #4c4f69;             /* text          7.06 on base                    */
   --fg-muted: #5c5f77;       /* subtext1      5.53                            */
   --fg-faint: #63667c;       /* between subtext0 and subtext1, 4.85           */
@@ -74,7 +73,6 @@
     --bg: #1e1e2e;           /* base                                          */
     --bg-soft: #181825;      /* mantle                                        */
     --bg-raised: #232336;    /* between base and surface0                     */
-    --bg-sunk: #11111b;      /* crust                                         */
     --fg: #cdd6f4;           /* text         11.34 on base                    */
     --fg-muted: #a6adc8;     /* subtext0      7.37                            */
     --fg-faint: #9399b2;     /* overlay2      5.81                            */
@@ -879,7 +877,7 @@ footer p { margin-bottom: 0.45rem; }
 
 @media print {
   :root {
-    --bg: #fff; --bg-soft: #fff; --bg-raised: #fff; --bg-sunk: #fff;
+    --bg: #fff; --bg-soft: #fff; --bg-raised: #fff;
     --fg: #000; --fg-muted: #333; --fg-faint: #555;
     --accent: #000; --accent-2: #000; --accent-3: #000; --ok: #000;
     --accent-soft: #f2f2f2; --accent-2-soft: #f2f2f2;
