@@ -506,6 +506,7 @@ p { margin: 0 0 1.1rem; text-wrap: pretty; }
 .card-links a::after { content: " →"; }
 
 .collaborators { margin-top: 0.4rem; }
+.fine-role { color: var(--fg-faint); }
 
 /* ---- career timeline -------------------------------------------------- */
 
@@ -897,7 +898,7 @@ footer p { margin-bottom: 0.45rem; }
      colophon about how the page is built — none of which belongs on a document
      someone prints to read on a train. Everything a CV is actually for stays. */
   .topnav, .cta, .anchor, .card-links, .updated, .section-note, .portrait,
-  #voices, .quotes, #faq, .qa, #colophon, ul.colophon, .collaborators {
+  #voices, .quotes, #faq, .qa, #contact, #colophon, ul.colophon, .collaborators {
     display: none;
   }
 

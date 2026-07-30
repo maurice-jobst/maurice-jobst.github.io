@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://maurice-jobst.github.io/</loc><lastmod>2026-07-26</lastmod></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://maurice-jobst.github.io/</loc><lastmod>2026-07-30</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://maurice-jobst.github.io/"/><xhtml:link rel="alternate" hreflang="de" href="https://maurice-jobst.github.io/de/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://maurice-jobst.github.io/"/></url>
+  <url><loc>https://maurice-jobst.github.io/de/</loc><lastmod>2026-07-30</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://maurice-jobst.github.io/"/><xhtml:link rel="alternate" hreflang="de" href="https://maurice-jobst.github.io/de/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://maurice-jobst.github.io/"/></url>
   <url><loc>https://maurice-jobst.github.io/case-studies/deutschland-ticket-turnaround.html</loc><lastmod>2026-07-24</lastmod></url>
   <url><loc>https://maurice-jobst.github.io/case-studies/banking-act-to-specifications.html</loc><lastmod>2026-07-24</lastmod></url>
   <url><loc>https://maurice-jobst.github.io/case-studies/hub-and-spoke-estate.html</loc><lastmod>2026-07-24</lastmod></url>

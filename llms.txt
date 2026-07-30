@@ -16,10 +16,10 @@ Based in Frankfurt am Main, Germany. Languages: German, English. Open to: Princi
 
 ## How he works
 
-- **AI at the edges, deterministic core** — Agents draft, triage and summarize. Anything that has to be reproducible — a converge, a deploy, a secret — stays a script. This page is the argument applied to itself: an agent wrote it, and a stdlib generator renders it.
-- **The operating model before the app** — A platform at 1.6 stars is rarely a UI problem. Fix who decides, who is accountable and what the SLA actually measures, and the release notes start writing themselves.
-- **Regulation becomes testable properties** — An obligation that cannot be tested has not been implemented, it has been promised. I take the statute apart until each clause is a property with a pass or fail, and I decide the ambiguities in writing before anyone builds against them.
-- **Claims carry their evidence** — A number on this page can be checked. In the open-source work the same rule is machine-enforced: sources cited, load-bearing claims put to refute-prompted votes, and the claims that failed published alongside the ones that passed.
+- **AI at the edges, deterministic core**: Agents draft, triage and summarize. A converge, a deploy, a secret: anything that has to be reproducible stays a script. This page makes that same argument about itself. An agent wrote it, and a stdlib generator renders it.
+- **The operating model before the app**: A platform at 1.6 stars is rarely a UI problem. Fix who decides, who is accountable and what the SLA measures, and the release notes start writing themselves.
+- **Regulation becomes testable properties**: An untestable obligation is a promise, not an implementation. I take the statute apart until each clause is a property with a pass or fail, and I decide the ambiguities in writing before anyone builds against them.
+- **Claims carry their evidence**: A number on this page can be checked. In the open-source work the same rule is machine-enforced: sources cited, load-bearing claims put to refute-prompted votes, and the claims that failed published alongside the ones that passed.
 
 ## Domain focus
 
@@ -29,10 +29,19 @@ Based in Frankfurt am Main, Germany. Languages: German, English. Open to: Princi
 - **Leadership and delivery**: product management, program management, people leadership, vendor and partner governance
 - **Systems and resilience**: KRITIS, NIS2, core banking, public-sector mobility, regulated cloud delivery, GitOps, Infrastructure as Code
 
+## Network
+
+For mandates that need build capacity as well as leadership: I lead the engagement, and engineers I have already shipped with take the build.
+
+- [Dennis Pietsch](https://pietsch.xyz/) (GitHub: https://github.com/cybeerboy)
+- [Julian](https://goatpr0n.farm/) (GitHub: https://github.com/jaypikay; cybersecurity, hardware & protocol reverse engineering)
+- [@monsdroid](https://github.com/monsdroid)
+
 ## Profiles
 
 - https://www.linkedin.com/in/mauricejobst/
 - https://github.com/maurice-jobst
+- German version of this page: https://maurice-jobst.github.io/de/
 
 ## Questions and answers
 
