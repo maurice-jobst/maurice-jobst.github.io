@@ -508,6 +508,21 @@ p { margin: 0 0 1.1rem; text-wrap: pretty; }
 .collaborators { margin-top: 0.4rem; }
 .fine-role { color: var(--fg-faint); }
 
+/* ---- the bench -------------------------------------------------------- */
+
+/* The expanded bench block: pitch paragraphs read as body prose, each
+   person is a name line over a bio paragraph. Reuses .kicker for the
+   heading and .fine-role for the aside, so the block inherits the page's
+   existing type system instead of adding one. */
+.bench { margin-top: 2.5rem; max-width: 72ch; }
+.bench .kicker { margin-bottom: 0.75rem; }
+.bench-pitch { margin: 0 0 0.75rem; }
+.bench-person { margin-top: 1.4rem; }
+.bench-name { margin: 0 0 0.25rem; font-weight: 600; }
+.bench-name .fine-role { font-weight: 400; }
+.bench-bio { margin: 0; }
+.bench + .fine, .bench > .fine { margin-top: 1.2rem; }
+
 /* ---- career timeline -------------------------------------------------- */
 
 /* Replaces a four-column table that ran five type treatments in a single row.
