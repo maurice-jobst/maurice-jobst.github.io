@@ -72,7 +72,7 @@ Principal-level product and leadership mandates where payments leadership and AI
 
 ### Where can I see his work?
 
-The three case studies on this site cover payments and regulatory translation, delivery-governance turnaround, and operating-model design. Beyond them: the GitHub profile at github.com/maurice-jobst and the open-source ai-workbench repository, which publishes the research behind its own design including the two claims that failed verification. BEMBEL and its community-data layer bembel-data are described here but not linked; both repositories stay private until the v1.0 release in March 2027.
+The three case studies on this site cover payments and regulatory translation, delivery-governance turnaround, and operating-model design. Beyond them: the GitHub profile at github.com/maurice-jobst and the open-source ai-workbench repository, which publishes the research behind its own design including the two claims that failed verification. This page describes BEMBEL and its community-data layer bembel-data without linking them, because both repositories stay private until the v1.0 release in March 2027.
 
 ## Notes
 
