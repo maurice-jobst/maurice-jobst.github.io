@@ -13,6 +13,7 @@ Based in Frankfurt am Main, Germany. Languages: German, English. Open to: Princi
 ## Open source
 
 - [ai-workbench](https://github.com/maurice-jobst/ai-workbench): A file-first system for running product-management work with an AI agent: markdown as state, deterministic checks, and a verification culture borrowed from compliance work.
+- BEMBEL · bembel-data: A free iPhone city app for Frankfurt/Rhein-Main, led as PM and architect with a three-person engineering team: AI agents write the implementation, a human reviews every pull request, and CI holds the format, schema and data-provenance gates. Its community-data layer, bembel-data, keeps Frankfurt kiosk culture as pull requests: every entry cites a source, and each account gets one rating per entry because a CI check rejects any pull request touching a rating file named for someone else.
 
 ## How he works
 
@@ -71,7 +72,7 @@ Principal-level product and leadership mandates where payments leadership and AI
 
 ### Where can I see his work?
 
-The three case studies on this site cover payments and regulatory translation, delivery-governance turnaround, and operating-model design. Beyond them: the GitHub profile at github.com/maurice-jobst, and the open-source ai-workbench repository, which publishes the research behind its own design including the two claims that failed verification.
+The three case studies on this site cover payments and regulatory translation, delivery-governance turnaround, and operating-model design. Beyond them: the GitHub profile at github.com/maurice-jobst and the open-source ai-workbench repository, which publishes the research behind its own design including the two claims that failed verification. BEMBEL and its community-data layer bembel-data are described here but not linked; both repositories stay private until the v1.0 release in March 2027.
 
 ## Notes
 
