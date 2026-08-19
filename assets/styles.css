@@ -953,3 +953,22 @@ footer p { margin-bottom: 0.45rem; }
   a { color: #000; text-decoration: underline; }
   a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 8pt; color: #555; }
 }
+
+/* --- CV page (/cv.html) — owner decision 2026-08-19 ---------------------- */
+.cv > .role { font-size: 1.05rem; color: var(--fg-muted); margin-top: 0.2rem; }
+.cv-contact { color: var(--fg-faint); font-size: 0.9rem; margin: 0.4rem 0 1.2rem; }
+.cv-contact i, .cv-earlier i, .cv-meta i { font-style: normal; color: var(--fg-faint); }
+.cv-role { margin-bottom: 1.1rem; }
+.cv-role h3 { margin-bottom: 0.15rem; }
+.cv-meta { color: var(--fg-faint); font-size: 0.85rem; margin-bottom: 0.3rem; }
+.cv-earlier { list-style: none; padding: 0; }
+.cv-earlier li { margin: 0.35rem 0; }
+.cv-earlier time { font-variant-numeric: tabular-nums; color: var(--fg-faint); margin-right: 0.4rem; }
+
+@media print {
+  /* The CV page prints as the document itself; the note that says "print this
+     page" and the breadcrumb are screen furniture. */
+  .no-print { display: none; }
+  .cv h1 { margin-top: 0; }
+  .cv-role, .cv-earlier li { page-break-inside: avoid; }
+}
