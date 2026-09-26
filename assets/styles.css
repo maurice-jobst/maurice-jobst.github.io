@@ -952,6 +952,9 @@ footer p { margin-bottom: 0.45rem; }
   .table-wrap { background: none; overflow: visible; }
   a { color: #000; text-decoration: underline; }
   a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 8pt; color: #555; }
+  /* The CV contact line and the footer print the address as their link text already;
+     the suffix would print it twice. */
+  .cv-contact a::after, footer a::after { content: none; }
 }
 
 /* --- CV page (/cv.html) — owner decision 2026-08-19 ---------------------- */
