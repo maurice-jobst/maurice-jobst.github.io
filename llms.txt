@@ -1,8 +1,8 @@
 # Maurice Jobst
 
-> I am Maurice Jobst, a Senior Product & Program Leader in Frankfurt am Main, owning open-loop transit payments end to end and European payment sovereignty (EPI) at Cubic Transportation Systems. I have spent 15+ years in payments, fintech, cybersecurity and public-sector mobility, with regulated delivery under BaFin, DORA, MaRisk/BAIT and the EU AI Act across the last decade of it. I owned a company's whole product function at Oddspedia, and more recently led 20+ people across vendors and partner organizations through Germany's Deutschland-Ticket rollout, inside a €5M+ B2G portfolio.
+> I am Maurice Jobst, a Product & Program Leader in Frankfurt am Main, owning open-loop transit payments end to end and European payment sovereignty (EPI) at Cubic Transportation Systems. I have spent 15+ years in payments, fintech, cybersecurity and public-sector mobility, with the last decade of it in regulated delivery: BaFin-supervised core banking under KWG and MaRisk/BAIT, open payments for transit agencies under the obligations banks and PSPs pass down from DORA, and an AI usage standard written against the EU AI Act. I owned a company's whole product function at Oddspedia, and more recently led 20+ people across vendors and partner organizations through Germany's Deutschland-Ticket rollout, inside a €5M+ B2G portfolio.
 
-Based in Frankfurt am Main, Germany. Languages: German, English. Open to: Principal-level product and leadership mandates where payments and AI governance meet regulated delivery: Head of Product, Head of Payments, practice build-out. Rhein-Main on site, hybrid or remote Germany-wide, relocation for the right mandate. One month's notice.
+Based in Frankfurt am Main, Germany. Languages: German, English. Not on the market; open to conversations about Principal-level product and leadership mandates where payments and AI governance meet regulated delivery: Head of Product, Head of Payments, practice build-out. Rhein-Main on site, hybrid or remote Germany-wide.
 
 ## Case studies
 
@@ -36,8 +36,6 @@ Based in Frankfurt am Main, Germany. Languages: German, English. Open to: Princi
 For mandates that need build capacity as well as leadership: I lead the engagement, and engineers I have already shipped with take the build.
 
 - [Dennis Pietsch](https://pietsch.xyz/) (GitHub: https://github.com/cybeerboy; engineering leadership, platforms at scale): Dennis has built production software for 19 years and leads engineering as Head of IT today, hands-on in the code. The systems he has developed and operates serve around four million users, and he coordinates over 30 developers, freelancers and technology partners. His delivered work spans 17 systems, among them a central automotive platform connecting importers, dealers, banks and vehicle owners for brands from Kia to Jaguar Land Rover, a Europe-wide inventory system with interfaces to 25 dealer-management systems, and a B2B platform linking over 1,200 specialist dealers with manufacturers. He owns the path from business requirement through architecture to operations, and he works from Nidda, in the Rhein-Main region.
-- [Julian](https://goatpr0n.farm/) (GitHub: https://github.com/jaypikay; cybersecurity, hardware & protocol reverse engineering): Julian takes systems apart to find out what they trust. His research blog documents hardware and protocol reverse engineering in public since 2019: recovering a bricked Proxmark3 RFID tool with a Bus Pirate, reconstructing the USB protocols of battery chargers, flash programmers and an end-of-life action camera, plus a Google CTF write-up. On GitHub he is an Arctic Code Vault contributor with 33 public repositories. On a payments or identity build he is the one who reads the wire protocol before anyone relies on it.
-- [@monsdroid](https://github.com/monsdroid)
 
 ## Profiles
 
@@ -50,7 +48,7 @@ For mandates that need build capacity as well as leadership: I lead the engageme
 
 ### Who is Maurice Jobst?
 
-Maurice Jobst is a Senior Product & Program Leader based in Frankfurt am Main, Germany. He owns open-loop transit payments end to end and European payment sovereignty (EPI) at Cubic Transportation Systems, and has spent 15+ years in payments, fintech, cybersecurity and public-sector mobility.
+Maurice Jobst is a Product & Program Leader based in Frankfurt am Main, Germany. He owns open-loop transit payments end to end and European payment sovereignty (EPI) at Cubic Transportation Systems, and has spent 15+ years in payments, fintech, cybersecurity and public-sector mobility.
 
 ### What does Maurice Jobst work on?
 
@@ -58,7 +56,7 @@ He owns open-loop payments end to end for the Umo platform at Cubic Transportati
 
 ### Which regulatory frameworks has he delivered under?
 
-BaFin supervision and KWG for core banking, MiFID II for Tier-1 bank modernization, and DORA, KRITIS and NIS2 for operational resilience. He tracks the EU AI Act, PSD2/PSD3 and the Instant Payments Regulation for current work.
+BaFin supervision and KWG for core banking, MiFID II for Tier-1 bank modernization, and, in open payments for transit agencies, the DORA obligations that banks and PSPs pass down to their providers, alongside PSD2 and the scheme rulebooks. He wrote his product organization's AI usage standard against the EU AI Act, and he tracks PSD3/PSR, KRITIS/NIS2 and the Instant Payments Regulation for current work.
 
 ### What is his most cited result?
 
@@ -70,7 +68,7 @@ Both kinds. As Head of Product Management at Oddspedia in 2018–2019 he owned t
 
 ### What kind of role is he open to?
 
-Principal-level product and leadership mandates where payments leadership and AI governance meet regulated-industry delivery: Head of Product, Head of Payments, practice build-out. Frankfurt and the Rhein-Main region on site, hybrid or remote Germany-wide, relocation for the right mandate. He is available at one month's notice.
+He is not on the market. He takes conversations about Principal-level product and leadership mandates where payments leadership and AI governance meet regulated-industry delivery: Head of Product, Head of Payments, practice build-out. Frankfurt and the Rhein-Main region on site, hybrid or remote Germany-wide.
 
 ### Where can I see his work?
 
