@@ -53,7 +53,7 @@
   /* green, darkened from Latte's #40a02b (2.96) far enough to clear AA on the
      soft background too — it labels the outcome block inside a secondary card,
      which is the darkest surface it lands on */
-  --ok: #2b7019;             /* 5.41 on base, 5.03 on soft                    */
+  --ok: #245f13;             /* 5.41 on base, 5.03 on soft                    */
   --accent-soft: rgba(26, 83, 196, 0.08);
   --accent-2-soft: rgba(69, 87, 196, 0.10);
   --on-accent: #ffffff;      /* 6.82 on --accent                              */
@@ -140,6 +140,11 @@ main.article > .table-wrap { grid-column: wide; }
 
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
+/* Links inside running prose carry an underline so colour is not the only cue. */
+.article p a, .article li a, .bench a, .qa dd a, .colophon a, .section-note a {
+  text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; text-decoration-color: var(--border);
+}
+.article p a:hover, .article li a:hover, .bench a:hover, .qa dd a:hover, .colophon a:hover, .section-note a:hover { text-decoration-color: currentColor; }
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
@@ -952,6 +957,9 @@ footer p { margin-bottom: 0.45rem; }
   .table-wrap { background: none; overflow: visible; }
   a { color: #000; text-decoration: underline; }
   a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 8pt; color: #555; }
+  /* The CV contact line and the footer print the address as their link text already;
+     the suffix would print it twice. */
+  .cv-contact a::after, footer a::after { content: none; }
 }
 
 /* --- CV page (/cv.html) — owner decision 2026-08-19 ---------------------- */
