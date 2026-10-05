@@ -45,8 +45,8 @@
       "url": "https://maurice-jobst.github.io/case-studies/banking-act-to-specifications.html",
       "mainEntityOfPage": "https://maurice-jobst.github.io/case-studies/banking-act-to-specifications.html",
       "inLanguage": "en",
-      "datePublished": "2026-07-24",
-      "dateModified": "2026-07-24",
+      "datePublished": "2026-10-03",
+      "dateModified": "2026-10-03",
       "author": {
         "@id": "https://maurice-jobst.github.io/#person"
       },
@@ -64,7 +64,7 @@
       "givenName": "Maurice",
       "familyName": "Jobst",
       "jobTitle": "Senior Product Manager",
-      "description": "I am Maurice Jobst, a Product & Program Leader in Frankfurt am Main, owning open-loop transit payments end to end and European payment sovereignty (EPI) at Cubic Transportation Systems. I have spent 15+ years in payments, fintech, cybersecurity and public-sector mobility, with the last decade of it in regulated delivery: BaFin-supervised core banking under KWG and MaRisk/BAIT, open payments for transit agencies under the obligations banks and PSPs pass down from DORA, and an AI usage standard written against the EU AI Act. I owned a company's whole product function at Oddspedia, and more recently led 20+ people across vendors and partner organizations through Germany's Deutschland-Ticket rollout, inside a €5M+ B2G portfolio.",
+      "description": "I am Maurice Jobst, a Product & Program Leader in Frankfurt am Main, owning open-loop transit payments end to end at Cubic Transportation Systems. I have spent 15+ years in payments, fintech, cybersecurity and public-sector mobility, with the last decade of it in regulated delivery: BaFin-supervised core banking under KWG, open payments for transit agencies under the obligations banks and PSPs pass down from DORA, and an AI usage standard written against the EU AI Act. I owned a company's whole product function at Oddspedia, and more recently led 20+ people across vendors and partner organizations through Germany's Deutschland-Ticket rollout, inside a €5M+ B2G program.",
       "url": "https://maurice-jobst.github.io/",
       "mainEntityOfPage": "https://maurice-jobst.github.io/",
       "email": "mailto:maurice.jobst@gmail.com",
@@ -161,7 +161,7 @@
 <main id="main" class="article">
 <p class="breadcrumb"><a href="../index.html">Maurice Jobst</a> / Case study</p>
 <h1>Turning a banking act into engineering specifications</h1>
-<p><em>Velvon Bank, 2019–2020 · Product Manager, Munich. Core banking on Google Cloud Platform, under BaFin scrutiny, for a German banking-license acquisition.</em> <em>Client and deal specifics are confidential. Everything below stays at architecture level, every fact is on my resume, and the fuller version is available in conversation.</em></p>
+<p><em>Velvon Bank, 2019–2020 · Product Manager. Core banking on Google Cloud Platform, under BaFin scrutiny, for a German banking-license acquisition.</em> <em>Client and deal specifics are confidential. Everything below stays at architecture level, every fact is on my resume, and the fuller version is available in conversation.</em></p>
 <h2 id="the-situation"><span class="hash">#</span>The situation<a class="anchor" href="#the-situation" aria-label="Link to this section">#</a></h2>
 <p>A startup was acquiring a German banking license. That means building core banking infrastructure that the Bundesanstalt für Finanzdienstleistungsaufsicht will examine, on a cloud platform, at a pace set by the deal rather than by the engineering.</p>
 <p>Two clocks ran against each other. The delivery clock wanted weekly releases and a team that could change its mind. The supervisory clock wanted a system whose behaviour you could describe in advance, evidence after the fact, and defend to an examiner who had never met the team.</p>
@@ -181,12 +181,12 @@
 <p><strong>Decide the ambiguity in writing, once.</strong> Every legal text has gaps that engineers must fill. Fill them yourself, in the specification, with the reasoning attached. Otherwise the gap is filled anyway, silently, differently, by whoever hits it first at 17:00 on a Friday.</p>
 <p><strong>Name the boundary where your platform's guarantees end.</strong> Regulated cloud work lives or dies on this. Write down what the provider guarantees, what it does not, and what your application does about the difference.</p>
 <h2 id="what-this-case-study-cannot-show-you"><span class="hash">#</span>What this case study cannot show you<a class="anchor" href="#what-this-case-study-cannot-show-you" aria-label="Link to this section">#</a></h2>
-<p>No star rating, no renewal figure. The <a href="deutschland-ticket-turnaround.html">Deutschland-Ticket turnaround</a> alongside this one carries the numbers. This engagement carries the method, and the method is the part that transfers.</p>
+<p>No star rating, no renewal figure, and no audit. The parent stopped the German launch in early 2020, before the bank opened, so no examiner ever tested the build in operation. The <a href="deutschland-ticket-turnaround.html">Deutschland-Ticket turnaround</a> alongside this one carries the numbers. This engagement carries the method, and the method is the part that transfers.</p>
 <h2 id="why-it-matters-again-now"><span class="hash">#</span>Why it matters again now<a class="anchor" href="#why-it-matters-again-now" aria-label="Link to this section">#</a></h2>
-<p>Payments is the deepest thread in my fifteen years: PayPal in Dublin, payment-gateway and gaming-license compliance at Tipico, multi-gateway integration under sub-second latency and failover requirements at Oddspedia, BaFin-supervised core banking here, and today European payment sovereignty at Cubic, integrating European Payments Initiative digital identity with account-centric transit fare payment.</p>
+<p>Payments is the deepest thread in my 15+ years: PayPal in Dublin, payment-gateway and gaming-license compliance at Tipico, multi-gateway integration under sub-second latency and failover requirements at Oddspedia, BaFin-supervised core banking here, and today open-loop transit payments at Cubic, with the compliance groundwork for EU digital identity at the gate next to account-based fare payment.</p>
 <p>The same translation problem is arriving again, at scale, on a published timetable. PSD3 and the Payment Services Regulation reached final compromise texts in April 2026, with application expected around 2028 and the Verification of Payee extension roughly six months behind it. Verification of Payee has been mandatory for euro instant credit transfers since October 2025. The digital euro pilot phase begins staffing now. Every payment service provider in the EU is about to turn several hundred pages of regulation into systems that examiners will test.</p>
 <p>That is the same job as the one above, with more zeroes. It is the job I want.</p>
-<p>---</p>
+<hr>
 <p><em>Related: <a href="hub-and-spoke-estate.html">running an infrastructure estate like a regulated hub-and-spoke organization</a> applies the same doctrine to an operating model instead of a ledger.</em></p>
 </main>
 <footer>

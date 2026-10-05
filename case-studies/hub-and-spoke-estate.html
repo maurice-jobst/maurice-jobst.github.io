@@ -43,8 +43,8 @@
       "url": "https://maurice-jobst.github.io/case-studies/hub-and-spoke-estate.html",
       "mainEntityOfPage": "https://maurice-jobst.github.io/case-studies/hub-and-spoke-estate.html",
       "inLanguage": "en",
-      "datePublished": "2026-07-24",
-      "dateModified": "2026-07-24",
+      "datePublished": "2026-09-29",
+      "dateModified": "2026-09-29",
       "author": {
         "@id": "https://maurice-jobst.github.io/#person"
       },
@@ -62,7 +62,7 @@
       "givenName": "Maurice",
       "familyName": "Jobst",
       "jobTitle": "Senior Product Manager",
-      "description": "I am Maurice Jobst, a Product & Program Leader in Frankfurt am Main, owning open-loop transit payments end to end and European payment sovereignty (EPI) at Cubic Transportation Systems. I have spent 15+ years in payments, fintech, cybersecurity and public-sector mobility, with the last decade of it in regulated delivery: BaFin-supervised core banking under KWG and MaRisk/BAIT, open payments for transit agencies under the obligations banks and PSPs pass down from DORA, and an AI usage standard written against the EU AI Act. I owned a company's whole product function at Oddspedia, and more recently led 20+ people across vendors and partner organizations through Germany's Deutschland-Ticket rollout, inside a €5M+ B2G portfolio.",
+      "description": "I am Maurice Jobst, a Product & Program Leader in Frankfurt am Main, owning open-loop transit payments end to end at Cubic Transportation Systems. I have spent 15+ years in payments, fintech, cybersecurity and public-sector mobility, with the last decade of it in regulated delivery: BaFin-supervised core banking under KWG, open payments for transit agencies under the obligations banks and PSPs pass down from DORA, and an AI usage standard written against the EU AI Act. I owned a company's whole product function at Oddspedia, and more recently led 20+ people across vendors and partner organizations through Germany's Deutschland-Ticket rollout, inside a €5M+ B2G program.",
       "url": "https://maurice-jobst.github.io/",
       "mainEntityOfPage": "https://maurice-jobst.github.io/",
       "email": "mailto:maurice.jobst@gmail.com",
@@ -175,7 +175,7 @@
 <p>That speed comes from three costs I deleted. Each unit reuses one shape instead of a bespoke process. The hub already holds the doctrine, so nobody does archaeology. Everything converges from code, so I never reconstruct state by hand.</p>
 <h2 id="where-ai-belongs-and-where-it-does-not"><span class="hash">#</span>Where AI belongs, and where it does not<a class="anchor" href="#where-ai-belongs-and-where-it-does-not" aria-label="Link to this section">#</a></h2>
 <p>The doctrine fits in one sentence: <strong>AI at the edges, deterministic core.</strong> The agent authors config, drafts documents, triages findings and proposes plans. It never sits inside a path that must be byte-reproducible: converge, deploy, secrets. A deterministic sweep audits the estate weekly with pure reads and structured output, so it cannot hallucinate a green light. The agent reasons about the findings afterward.</p>
-<p>Both kinds of operator get the same write rules. The mainline is push-protected, every change lands as a reviewable PR, and review runs in both directions: I review the agent's work, and the agent reviews mine. One category of sensitive personal records the model must never read at all, and that fence is a deny rule in the tool's permission layer instead of a sentence in a README.</p>
+<p>Both kinds of operator get the same write rules. The mainline is push-protected, every change lands as a reviewable PR, and review runs in both directions: I review the agent's work, and the agent reviews mine. Where a merge requires a co-signature, the agent's review can block it. The asymmetry is deliberate: I hold a break-glass path onto a host, and the agent holds none. Using it is not silent. The session shows in the host's logs as an authenticated connection with elevated rights, the repository still holds the declared state, and the next sweep flags the host as diverged and alerts until it is reconverged from source. Override is possible, instant, and on the record, which is what human oversight with authority means in practice. One category of sensitive personal records the model must never read at all, and that fence is a deny rule in the tool's permission layer instead of a sentence in a README.</p>
 <h2 id="the-generalizable-part"><span class="hash">#</span>The generalizable part<a class="anchor" href="#the-generalizable-part" aria-label="Link to this section">#</a></h2>
 <p>This estate is household-scale by design, and I do not claim otherwise. What transfers is the operating model.</p>
 <p>Map the nouns and you get a regulated enterprise's problem statement. A cooperative banking group or a KRITIS operator has decentralized units that must dock onto central doctrine without a central bottleneck, regulators who ask them to <em>prove the estate matches its policy</em> rather than to produce one, and AI capability to adopt without ever letting it into the audited core.</p>
@@ -190,6 +190,8 @@
 </tbody></table></div>
 <p>Drift is the primary enemy at any scale, in config, in docs or in policy, because it is one gap wearing different clothes: what the organization believes about itself against what is running.</p>
 <p>An operating model that depends on people remembering the doctrine will drift. Put the doctrine in a hub, dock the units through one landing path, and let a machine do the checking. Then the next unit, or the next agent, costs you a day.</p>
+<hr>
+<p><em>Related: <a href="deutschland-ticket-turnaround.html">the Deutschland-Ticket turnaround</a> ran the same doctrine at organizational scale; <a href="banking-act-to-specifications.html">turning a banking act into engineering specifications</a> applies it to a ledger.</em></p>
 </main>
 <footer>
 <p><a href="../index.html">Maurice Jobst</a> · <a href="https://github.com/maurice-jobst">GitHub</a> · <a href="https://www.linkedin.com/in/mauricejobst/">LinkedIn</a> · <a href="mailto:maurice.jobst@gmail.com">Email</a></p>
