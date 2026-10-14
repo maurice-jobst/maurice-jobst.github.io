@@ -23,6 +23,23 @@ Based in Frankfurt am Main, Germany. Languages: German, English. Employed, and o
 - **Regulation becomes testable properties**: An untestable obligation is a promise, not an implementation. I take the statute apart until each clause is a property with a pass or fail, and I decide the ambiguities in writing before anyone builds against them.
 - **Claims carry their evidence**: A number on this page can be checked. In the open-source work the same rule is machine-enforced: sources cited, each load-bearing claim put three times to a local model prompted to refute it, every verdict reviewed by me, and the claims that failed published alongside the ones that passed.
 
+## Glossary
+
+- **EMV**: The chip-and-contactless card standard run by EMVCo, owned by the big card schemes. At a transit validator it means the bank card or phone wallet in your pocket taps as the ticket.
+- **EPI**: The European Payments Initiative: a bank-led group of European banks and payment companies building a European payment scheme and wallet, Wero, as an alternative to the US card schemes.
+- **EUDI**: The EU Digital Identity Wallet under the revised eIDAS regulation: a state-backed wallet on the phone that proves who you are, or a single attribute such as age or a student status, to a service or a gate.
+- **PSD2/PSD3**: The EU payment services directives. PSD2 (2015) brought strong customer authentication and open banking; PSD3 with the Payment Services Regulation is its successor package, provisionally agreed by Council and Parliament in November 2025 and not yet in force.
+- **DORA**: The EU Digital Operational Resilience Act, applicable since January 2025: ICT risk, incident reporting and third-party rules for banks, insurers and payment firms, which they pass down to every vendor in the chain.
+- **MaRisk**: BaFin's Minimum Requirements for Risk Management, the circular that turns the Banking Act's governance duties into concrete rules for how a German bank runs risk, outsourcing and IT.
+- **BAIT**: BaFin's supervisory requirements for IT at banks: the circular that spelled out what MaRisk expects of information security, change management and outsourcing. Superseded by DORA for the institutions DORA covers since January 2025, and repealed in full at the end of 2026.
+- **BaFin**: The Federal Financial Supervisory Authority, Germany's regulator for banks, insurers and securities firms. A system under BaFin scrutiny is one whose design decisions may be audited.
+- **KWG**: The Kreditwesengesetz, Germany's Banking Act: the statute that licenses banks and sets their governance duties, including the proper business organisation that MaRisk details.
+- **ISO/IEC 42001**: The first international management-system standard for AI, published in 2023: how an organisation governs the AI it builds or uses, auditable the way ISO 27001 is for information security.
+- **KRITIS**: Germany's critical-infrastructure regime: operators of energy, water, health, transport and finance installations above a threshold must meet the BSI's security requirements, run attack detection and report incidents, since December 2025 under the law that transposed NIS2.
+- **NIS2**: The EU's second network and information security directive, in force since 2023: cybersecurity duties and management liability for essential and important entities across sectors, transposed into German law in 2025.
+- **SEPA Instant**: Euro credit transfers settled in seconds, around the clock. The EU Instant Payments Regulation made receiving them mandatory for euro-area banks in 2025 and sending them later that year.
+- **open-loop**: Paying for transit with an ordinary bank card or phone wallet at the gate, instead of a closed card the operator issues. The fare is worked out afterwards from the taps.
+
 ## Domain focus
 
 - **Payments**: European Payments Initiative (EPI), Wero, PSD2, PSD3, Payment Services Regulation (PSR), Instant Payments Regulation, Verification of Payee, digital euro, SEPA, account-centric transit ticketing

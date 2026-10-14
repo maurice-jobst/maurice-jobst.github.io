@@ -22,6 +22,7 @@
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#eff1f5">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1e1e2e">
 <link rel="stylesheet" href="../assets/styles.css">
+<script src="../assets/site.js" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -155,9 +156,11 @@
 </script>
 </head>
 <body>
+<div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to content</a>
 <main id="main" class="article">
 <p class="breadcrumb"><a href="../index.html">Maurice Jobst</a> / Case study</p>
+<nav class="toc" data-spy aria-label="On this page"><p class="kicker">On this page</p><ol><li><a href="#one-reconcile-shape-one-direction">One reconcile shape, one direction</a></li><li><a href="#hub-and-spoke-doctrine-lives-once">Hub and spoke: doctrine lives once</a></li><li><a href="#time-to-dock-a-new-unit">Time to dock a new unit</a></li><li><a href="#where-ai-belongs-and-where-it-does-not">Where AI belongs, and where it does not</a></li><li><a href="#the-generalizable-part">The generalizable part</a></li></ol></nav>
 <h1>Running a personal infrastructure estate like a regulated hub-and-spoke organization</h1>
 <p><em>A dozen-plus repositories, two physical sites and three domains that must never mix, run by one part-time operator on a single operating model. That model is what a regulated hub-and-spoke organization needs.</em></p>
 <p>I run a personal infrastructure estate for my household: a containerized home server, a managed workstation, a private git forge, a second physical site, and a dozen-plus active repositories spanning infrastructure, a small business and personal administration. Three domains must never mix, across two sites, with one part-time operator, and AI sessions run in the loop across all of it every day.</p>
@@ -178,7 +181,7 @@
 <p>Both kinds of operator get the same write rules. The mainline is push-protected, every change lands as a reviewable PR, and review runs in both directions: I review the agent's work, and the agent reviews mine. Where a merge requires a co-signature, the agent's review can block it. The asymmetry is deliberate: I hold a break-glass path onto a host, and the agent holds none. Using it is not silent. The session shows in the host's logs as an authenticated connection with elevated rights, the repository still holds the declared state, and the next sweep flags the host as diverged and alerts until it is reconverged from source. Override is possible, instant, and on the record, which is what human oversight with authority means in practice. One category of sensitive personal records the model must never read at all, and that fence is a deny rule in the tool's permission layer instead of a sentence in a README.</p>
 <h2 id="the-generalizable-part"><span class="hash">#</span>The generalizable part<a class="anchor" href="#the-generalizable-part" aria-label="Link to this section">#</a></h2>
 <p>This estate is household-scale by design, and I do not claim otherwise. What transfers is the operating model.</p>
-<p>Map the nouns and you get a regulated enterprise's problem statement. A cooperative banking group or a KRITIS operator has decentralized units that must dock onto central doctrine without a central bottleneck, regulators who ask them to <em>prove the estate matches its policy</em> rather than to produce one, and AI capability to adopt without ever letting it into the audited core.</p>
+<p>Map the nouns and you get a regulated enterprise's problem statement. A cooperative banking group or a <button class="gl" type="button" popovertarget="gl-kritis" style="anchor-name:--gl-kritis"><dfn>KRITIS</dfn></button><span popover id="gl-kritis" class="gl-pop" style="position-anchor:--gl-kritis"><span class="gl-t">KRITIS</span><span class="gl-x">Germany&#x27;s critical-infrastructure regime: operators of energy, water, health, transport and finance installations above a threshold must meet the BSI&#x27;s security requirements, run attack detection and report incidents, since December 2025 under the law that transposed NIS2.</span></span> operator has decentralized units that must dock onto central doctrine without a central bottleneck, regulators who ask them to <em>prove the estate matches its policy</em> rather than to produce one, and AI capability to adopt without ever letting it into the audited core.</p>
 <p>The federation answers are the enterprise answers at a smaller scale:</p>
 <div class="table-wrap" tabindex="0" role="region" aria-label="Table"><table>
 <thead><tr><th>Problem</th><th>Answer</th></tr></thead>
@@ -195,7 +198,8 @@
 </main>
 <footer>
 <p><a href="../index.html">Maurice Jobst</a> · <a href="https://github.com/maurice-jobst">GitHub</a> · <a href="https://www.linkedin.com/in/mauricejobst/">LinkedIn</a> · <a href="mailto:maurice.jobst@gmail.com">Email</a></p>
-<p class="fine">Static HTML, zero JavaScript, no third-party requests. This page carries no instructions for an agent, only facts about a person.</p>
+<p class="fine">Static HTML, one small same-origin script, no third-party requests. This page carries no instructions for an agent, only facts about a person.</p>
+<p><button id="motion-toggle" type="button" class="motion" hidden aria-pressed="false" data-on="Animations: on" data-off="Animations: off">Animations: on</button></p>
 </footer>
 </body>
 </html>

@@ -22,6 +22,7 @@
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#eff1f5">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1e1e2e">
 <link rel="stylesheet" href="assets/styles.css">
+<script src="assets/site.js" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -136,6 +137,7 @@
 </script>
 </head>
 <body>
+<div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to content</a>
 <main id="main" class="article cv">
 <p class="breadcrumb no-print"><a href="index.html">Maurice Jobst</a> / CV</p>
@@ -167,7 +169,8 @@
 </main>
 <footer>
 <p><a href="index.html">Maurice Jobst</a> · <a href="https://github.com/maurice-jobst">GitHub</a> · <a href="https://www.linkedin.com/in/mauricejobst/">LinkedIn</a> · <a href="mailto:maurice.jobst@gmail.com">Email</a></p>
-<p class="fine">Static HTML, zero JavaScript, no third-party requests. This page carries no instructions for an agent, only facts about a person.</p>
+<p class="fine">Static HTML, one small same-origin script, no third-party requests. This page carries no instructions for an agent, only facts about a person.</p>
+<p><button id="motion-toggle" type="button" class="motion" hidden aria-pressed="false" data-on="Animations: on" data-off="Animations: off">Animations: on</button></p>
 </footer>
 </body>
 </html>

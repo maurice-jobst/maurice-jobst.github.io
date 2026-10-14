@@ -22,6 +22,7 @@
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#eff1f5">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1e1e2e">
 <link rel="stylesheet" href="../assets/styles.css">
+<script src="../assets/site.js" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -157,11 +158,13 @@
 </script>
 </head>
 <body>
+<div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to content</a>
 <main id="main" class="article">
 <p class="breadcrumb"><a href="../index.html">Maurice Jobst</a> / Case study</p>
+<nav class="toc" data-spy aria-label="On this page"><p class="kicker">On this page</p><ol><li><a href="#the-situation">The situation</a></li><li><a href="#why-a-legal-text-is-not-a-specification">Why a legal text is not a specification</a></li><li><a href="#what-i-did">What I did</a></li><li><a href="#the-method">The method</a></li><li><a href="#what-this-case-study-cannot-show-you">What this case study cannot show you</a></li><li><a href="#why-it-matters-again-now">Why it matters again now</a></li></ol></nav>
 <h1>Turning a banking act into engineering specifications</h1>
-<p><em>Velvon Bank, 2019–2020 · Product Manager. Core banking on Google Cloud Platform, under BaFin scrutiny, for a German banking-license acquisition.</em> <em>Client and deal specifics are confidential. Everything below stays at architecture level, every fact is on my resume, and the fuller version is available in conversation.</em></p>
+<p><em>Velvon Bank, 2019–2020 · Product Manager. Core banking on Google Cloud Platform, under <button class="gl" type="button" popovertarget="gl-bafin" style="anchor-name:--gl-bafin"><dfn>BaFin</dfn></button><span popover id="gl-bafin" class="gl-pop" style="position-anchor:--gl-bafin"><span class="gl-t">BaFin</span><span class="gl-x">The Federal Financial Supervisory Authority, Germany&#x27;s regulator for banks, insurers and securities firms. A system under BaFin scrutiny is one whose design decisions may be audited.</span></span> scrutiny, for a German banking-license acquisition.</em> <em>Client and deal specifics are confidential. Everything below stays at architecture level, every fact is on my resume, and the fuller version is available in conversation.</em></p>
 <h2 id="the-situation"><span class="hash">#</span>The situation<a class="anchor" href="#the-situation" aria-label="Link to this section">#</a></h2>
 <p>A startup was acquiring a German banking license. That means building core banking infrastructure that the Bundesanstalt für Finanzdienstleistungsaufsicht will examine, on a cloud platform, at a pace set by the deal rather than by the engineering.</p>
 <p>Two clocks ran against each other. The delivery clock wanted weekly releases and a team that could change its mind. The supervisory clock wanted a system whose behaviour you could describe in advance, evidence after the fact, and defend to an examiner who had never met the team.</p>
@@ -171,7 +174,7 @@
 <p>Leave those open and each engineer resolves them differently. Six months later the system works, nobody can say precisely how, and the examiner asks the one question that was never decided.</p>
 <h2 id="what-i-did"><span class="hash">#</span>What I did<a class="anchor" href="#what-i-did" aria-label="Link to this section">#</a></h2>
 <ul>
-<li><strong>Translated KWG requirements into deterministic engineering specifications.</strong> Each obligation became a stated system property with its own acceptance criteria, written so a developer could build against it and an auditor could test it. Same sentence, both readers.</li>
+<li><strong>Translated <button class="gl" type="button" popovertarget="gl-kwg" style="anchor-name:--gl-kwg"><dfn>KWG</dfn></button><span popover id="gl-kwg" class="gl-pop" style="position-anchor:--gl-kwg"><span class="gl-t">KWG</span><span class="gl-x">The Kreditwesengesetz, Germany&#x27;s Banking Act: the statute that licenses banks and sets their governance duties, including the proper business organisation that MaRisk details.</span></span> requirements into deterministic engineering specifications.</strong> Each obligation became a stated system property with its own acceptance criteria, written so a developer could build against it and an auditor could test it. Same sentence, both readers.</li>
 <li><strong>Mapped ledger and transaction-isolation boundaries</strong> for the core banking infrastructure on GCP. Where the cloud platform's own guarantees stopped, the specification said so and named what the application had to do instead. Assumed guarantees are how regulated cloud programs fail their first audit.</li>
 <li><strong>Held the line between startup speed and supervisory expectation</strong> rather than picking a side. The team kept its release cadence. The properties that carried regulatory weight moved to a slower, evidenced track with a named owner.</li>
 </ul>
@@ -183,15 +186,16 @@
 <h2 id="what-this-case-study-cannot-show-you"><span class="hash">#</span>What this case study cannot show you<a class="anchor" href="#what-this-case-study-cannot-show-you" aria-label="Link to this section">#</a></h2>
 <p>No star rating, no renewal figure, and no audit. The parent stopped the German launch in early 2020, before the bank opened, so no examiner ever tested the build in operation. The <a href="deutschland-ticket-turnaround.html">Deutschland-Ticket turnaround</a> alongside this one carries the numbers. This engagement carries the method, and the method is the part that transfers.</p>
 <h2 id="why-it-matters-again-now"><span class="hash">#</span>Why it matters again now<a class="anchor" href="#why-it-matters-again-now" aria-label="Link to this section">#</a></h2>
-<p>Payments is the deepest thread in my 15+ years: PayPal in Dublin, payment-gateway and gaming-license compliance at Tipico, multi-gateway integration under sub-second latency and failover requirements at Oddspedia, BaFin-supervised core banking here, and today open-loop transit payments at Cubic, with the compliance groundwork for EU digital identity at the gate next to account-based fare payment.</p>
-<p>The same translation problem is arriving again, at scale, on a published timetable. PSD3 and the Payment Services Regulation reached final compromise texts in April 2026, with application expected around 2028 and the Verification of Payee extension roughly six months behind it. Verification of Payee has been mandatory for euro instant credit transfers since October 2025. The digital euro pilot phase begins staffing now. Every payment service provider in the EU is about to turn several hundred pages of regulation into systems that examiners will test.</p>
+<p>Payments is the deepest thread in my 15+ years: PayPal in Dublin, payment-gateway and gaming-license compliance at Tipico, multi-gateway integration under sub-second latency and failover requirements at Oddspedia, BaFin-supervised core banking here, and today <button class="gl" type="button" popovertarget="gl-open-loop" style="anchor-name:--gl-open-loop"><dfn>open-loop</dfn></button><span popover id="gl-open-loop" class="gl-pop" style="position-anchor:--gl-open-loop"><span class="gl-t">open-loop</span><span class="gl-x">Paying for transit with an ordinary bank card or phone wallet at the gate, instead of a closed card the operator issues. The fare is worked out afterwards from the taps.</span></span> transit payments at Cubic, with the compliance groundwork for <button class="gl" type="button" popovertarget="gl-eudi" style="anchor-name:--gl-eudi"><dfn>EU digital identity</dfn></button><span popover id="gl-eudi" class="gl-pop" style="position-anchor:--gl-eudi"><span class="gl-t">EUDI</span><span class="gl-x">The EU Digital Identity Wallet under the revised eIDAS regulation: a state-backed wallet on the phone that proves who you are, or a single attribute such as age or a student status, to a service or a gate.</span></span> at the gate next to account-based fare payment.</p>
+<p>The same translation problem is arriving again, at scale, on a published timetable. <button class="gl" type="button" popovertarget="gl-psd2-psd3" style="anchor-name:--gl-psd2-psd3"><dfn>PSD3</dfn></button><span popover id="gl-psd2-psd3" class="gl-pop" style="position-anchor:--gl-psd2-psd3"><span class="gl-t">PSD2/PSD3</span><span class="gl-x">The EU payment services directives. PSD2 (2015) brought strong customer authentication and open banking; PSD3 with the Payment Services Regulation is its successor package, provisionally agreed by Council and Parliament in November 2025 and not yet in force.</span></span> and the Payment Services Regulation reached final compromise texts in April 2026, with application expected around 2028 and the Verification of Payee extension roughly six months behind it. Verification of Payee has been mandatory for euro instant credit transfers since October 2025. The digital euro pilot phase begins staffing now. Every payment service provider in the EU is about to turn several hundred pages of regulation into systems that examiners will test.</p>
 <p>That is the same job as the one above, with more zeroes. It is the job I want.</p>
 <hr>
 <p><em>Related: <a href="hub-and-spoke-estate.html">running an infrastructure estate like a regulated hub-and-spoke organization</a> applies the same doctrine to an operating model instead of a ledger.</em></p>
 </main>
 <footer>
 <p><a href="../index.html">Maurice Jobst</a> · <a href="https://github.com/maurice-jobst">GitHub</a> · <a href="https://www.linkedin.com/in/mauricejobst/">LinkedIn</a> · <a href="mailto:maurice.jobst@gmail.com">Email</a></p>
-<p class="fine">Static HTML, zero JavaScript, no third-party requests. This page carries no instructions for an agent, only facts about a person.</p>
+<p class="fine">Static HTML, one small same-origin script, no third-party requests. This page carries no instructions for an agent, only facts about a person.</p>
+<p><button id="motion-toggle" type="button" class="motion" hidden aria-pressed="false" data-on="Animations: on" data-off="Animations: off">Animations: on</button></p>
 </footer>
 </body>
 </html>

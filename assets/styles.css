@@ -23,7 +23,14 @@
  * deliberate departure from the published palette. Verified, not eyeballed:
  * every pair in this file was run through a contrast script.
  *
- * No web fonts, no JavaScript, no third-party request. System stacks only.
+ * No web fonts, no third-party request, system stacks only. One same-origin
+ * script (site.js) marks the section being read and keeps the motion switch;
+ * every effect below is CSS and degrades to the plain page without it.
+ *
+ * MOTION. Three guards, one rule: html.motion-off (the footer switch),
+ * prefers-reduced-motion and print each turn every animation off. The reveal
+ * and the progress line use scroll-driven animations behind @supports, so a
+ * browser without them renders the page as it was before 2026-10-14.
  */
 
 :root {
@@ -95,7 +102,60 @@
 html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  * { transition: none !important; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+html.motion-off { scroll-behavior: auto; }
+html.motion-off *, html.motion-off *::before, html.motion-off *::after {
+  transition: none !important; animation: none !important;
+}
+
+/* ---- view transitions ------------------------------------------------- */
+
+/* EN/DE and the case-study links cross-fade instead of flashing white. Same
+   origin, so the browser does it on its own; nothing to script. */
+@view-transition { navigation: auto; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.18s; }
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+}
+
+/* ---- reading progress ------------------------------------------------- */
+
+/* A 2px accent line along the top edge, scaled by how far down the document
+   the reader is. Scroll-driven, so it costs no script and no layout. */
+.progress {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 2px;
+  z-index: 6;
+  background: var(--accent);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  pointer-events: none;
+}
+@supports (animation-timeline: scroll()) {
+  .progress { animation: progress linear both; animation-timeline: scroll(root); }
+}
+@keyframes progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+html.motion-off .progress { display: none; }
+
+/* ---- reveal ----------------------------------------------------------- */
+
+/* Blocks fade up as they enter the viewport: 8px and 0.4s of the scroll range,
+   not a slideshow. `translate` rather than `transform`, so the card hover lift
+   on `transform` still applies once the reveal has finished. Content above the
+   fold is past its entry range on load and renders settled. */
+@supports (animation-timeline: view()) {
+  h2, .card, .entry, .quote, .principles > li, .speaking > li, .focus-group, .qa > dt, .qa > dd {
+    animation: reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 40%;
+  }
+}
+@keyframes reveal {
+  from { opacity: 0; translate: 0 8px; }
+  to { opacity: 1; translate: 0 0; }
 }
 
 body {
@@ -185,6 +245,8 @@ a:hover { text-decoration: underline; }
 .topnav a { color: var(--fg-muted); }
 .topnav a::before { content: "#"; color: var(--accent-2); opacity: 0.8; }
 .topnav a:hover { color: var(--accent); text-decoration: none; }
+.topnav a.is-reading { color: var(--fg); }
+.topnav a.is-reading::before { color: var(--accent); opacity: 1; }
 
 /* ---- hero ------------------------------------------------------------- */
 
@@ -208,7 +270,7 @@ h1 {
   line-height: 1.06;
   letter-spacing: -0.022em;
   text-wrap: balance;
-  margin: 0 0 0.3rem;
+  margin: 0.35rem 0 0.75rem;
 }
 .hero .role {
   font-size: 1.1875rem;
@@ -327,10 +389,13 @@ h1 {
 @media (min-width: 40rem) {
   .metrics { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
+.metrics { counter-reset: metric; }
 .metrics li {
-  padding: 1rem 1.1rem;
+  padding: 1.15rem 1.1rem 1.05rem;
   margin: 0;
   background: var(--bg-soft);
+  position: relative;
+  counter-increment: metric;
   /* the four labels are different lengths; anchoring the figure to the top and
      the label to the bottom keeps the baselines level when one of them wraps */
   display: flex;
@@ -338,15 +403,26 @@ h1 {
   justify-content: space-between;
   gap: 0.3rem;
 }
+/* the running number top-right is the one borrowing from pietsch.xyz that
+   survived the register check: it says "four facts, counted", nothing more */
+.metrics li::before {
+  content: "0" counter(metric);
+  position: absolute;
+  top: 0.65rem; right: 0.8rem;
+  font-family: var(--mono);
+  font-size: var(--fs-mono-xs);
+  color: var(--fg-faint);
+  opacity: 0.7;
+}
 .metrics .value {
   display: block;
   font-family: var(--mono);
   font-variant-numeric: tabular-nums lining-nums;
-  font-size: 1.4rem;
+  font-size: 1.85rem;
   font-weight: 600;
-  letter-spacing: -0.015em;
-  line-height: 1.2;
-  color: var(--fg);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--accent);
 }
 /* the glyph that says what the figure is, so the label does not have to */
 .metrics .unit {
@@ -376,12 +452,18 @@ h1 {
 
 /* ---- headings --------------------------------------------------------- */
 
+/* Cap height to the grid: the half-leading above a heading's capitals and below
+   its baseline is trimmed, so a heading sits on its rule and under its margin
+   at the distance the number says, not the distance plus the font's air. The
+   margins below were re-tuned once by eye after the trim (2026-10-14); a
+   browser without the property shows the pre-trim rhythm, a few px looser. */
+h1, h2, h3, .card h3, .metrics .value { text-box-trim: trim-both; text-box-edge: cap alphabetic; }
 h2 {
   font-size: 1.5rem;
   line-height: 1.25;
   letter-spacing: -0.016em;
-  margin: 3.5rem 0 1.15rem;
-  padding-bottom: 0.5rem;
+  margin: 3.75rem 0 1.25rem;
+  padding-bottom: 0.7rem;
   border-bottom: 1px solid var(--border-soft);
 }
 h2 .hash {
@@ -394,7 +476,7 @@ h3 {
   font-size: 1.1rem;
   line-height: 1.35;
   letter-spacing: -0.008em;
-  margin: 2rem 0 0.4rem;
+  margin: 2.1rem 0 0.6rem;
 }
 h3 + p { margin-top: 0; }
 h3.sub {
@@ -454,9 +536,23 @@ p { margin: 0 0 1.1rem; text-wrap: pretty; }
   box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  position: relative;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.18s ease;
 }
-.card:hover { border-color: var(--accent); box-shadow: var(--shadow-card-hover); }
+.card:hover { border-color: var(--accent); box-shadow: var(--shadow-card-hover); transform: translateY(-2px); }
+/* a short accent tick in the bottom-right corner, shown on hover: the card
+   acknowledges the pointer without changing colour all over */
+.card::after {
+  content: "";
+  position: absolute;
+  right: 1rem; bottom: -1px;
+  width: 1.4rem; height: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+.card:hover::after { opacity: 1; }
 
 /* The two client engagements carry the pitch; the doctrine piece and the
    open-source work sit below at a lower weight rather than as their peers. */
@@ -475,7 +571,7 @@ p { margin: 0 0 1.1rem; text-wrap: pretty; }
   margin: 0 0 0.5rem;
 }
 .card.lead .kicker { color: var(--accent-2); }
-.card h3 { margin: 0 0 0.55rem; font-size: 1.02rem; line-height: 1.3; }
+.card h3 { margin: 0.15rem 0 0.75rem; font-size: 1.02rem; line-height: 1.3; }
 .card-desc { font-size: var(--fs-sm); line-height: 1.5; color: var(--fg-muted); margin: 0 0 0.85rem; }
 
 /* The label sits on its own line. Inline, the wrapped text ran back underneath
@@ -564,6 +660,15 @@ p { margin: 0 0 1.1rem; text-wrap: pretty; }
 }
 .entry.lead { border-left-color: var(--accent-2); }
 .entry.lead::before { border-color: var(--accent-2); background: var(--accent-2); }
+/* the first lead entry is the present: its node breathes, slowly, 3px of halo */
+.timeline > .entry.lead:first-child::before {
+  box-shadow: 0 0 0 3px var(--accent-2-soft);
+  animation: node-glow 3.2s ease-in-out infinite;
+}
+@keyframes node-glow {
+  0%, 100% { box-shadow: 0 0 0 3px var(--accent-2-soft); }
+  50% { box-shadow: 0 0 0 7px transparent; }
+}
 .entry.compact { padding-top: 0.7rem; padding-bottom: 0.7rem; }
 .entry.compact::before { top: 1.1rem; }
 
@@ -828,6 +933,110 @@ em { color: var(--fg-muted); }
 
 .fine { color: var(--fg-faint); font-size: var(--fs-sm); line-height: 1.55; }
 
+/* ---- glossary --------------------------------------------------------- */
+
+/* The estate's glossary grammar (aurelius ADR 2026-09-25 §3, shared with
+   shop.home and money.home): the first use of a term on a page is a button
+   around a <dfn>, the explanation a [popover] span beside it. Click or tap
+   opens, Escape or a click outside closes. Here the popover is anchored under
+   the term (CSS anchor positioning, Baseline September 2026) and flips above
+   when there is no room; a browser without anchors places it centred in the
+   top layer, which is the UA default, and one without the Popover API shows
+   the term as plain text. */
+.gl {
+  all: unset;
+  cursor: pointer;
+  text-decoration: underline dotted var(--border);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+.gl:hover, .gl:focus-visible { text-decoration-color: var(--accent); }
+.gl:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+.gl dfn { font-style: inherit; }
+.gl-pop {
+  position: absolute;
+  /* position-anchor is inline on the element: one name per term, see build.py */
+  position-area: block-end span-inline-end;
+  position-try-fallbacks: flip-block, flip-inline, flip-block flip-inline;
+  margin: 0.45rem 0 0;
+  width: min(22rem, calc(100vw - 2 * var(--pad)));
+  padding: 0.8rem 0.95rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-raised);
+  color: var(--fg);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
+  font-family: var(--sans);
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+.gl-pop > span { display: block; }
+.gl-pop .gl-t {
+  font-family: var(--mono);
+  font-size: var(--fs-mono-sm);
+  font-weight: 600;
+  color: var(--accent-2);
+  margin-bottom: 0.3rem;
+}
+.gl-pop::backdrop { background: transparent; }
+/* On a phone an anchored card has no room on either side of the term, so the
+   popover becomes a sheet above the bottom edge instead: anchoring off, plain
+   insets on. The anchor name stays inline and simply has nothing to do. */
+@media (max-width: 40rem) {
+  .gl-pop {
+    position: fixed;
+    position-area: none;
+    position-try-fallbacks: none;
+    inset: auto var(--pad) var(--pad) var(--pad);
+    width: auto;
+    margin: 0;
+  }
+}
+/* entry: fade and lift in, @starting-style gives the from-state for an element
+   that has just been shown; exit is instant, which is what a dismissal wants */
+.gl-pop:popover-open { opacity: 1; translate: 0 0; transition: opacity 0.16s ease, translate 0.16s ease; }
+@starting-style { .gl-pop:popover-open { opacity: 0; translate: 0 -4px; } }
+@supports not selector(:popover-open) { .gl { text-decoration: none; cursor: auto; } .gl-pop { display: none; } }
+
+/* ---- article table of contents ---------------------------------------- */
+
+/* Inline under the breadcrumb on a narrow screen; at 86rem and up it moves into
+   the left gutter outside the frame and sticks, the section being read marked
+   by the script. `position: fixed` with a calc against the centred frame keeps
+   the article's own column untouched at every width. The breakpoint is the
+   frame (58rem) plus two gutters wide enough for the list (12.5rem each) plus
+   a margin: below it the calc lands off the left edge. */
+.toc { margin: 0 0 1.5rem; }
+.toc .kicker { margin-bottom: 0.4rem; }
+.toc ol {
+  list-style: none;
+  margin: 0; padding: 0;
+  font-family: var(--mono);
+  font-size: var(--fs-mono-sm);
+  line-height: 1.5;
+  display: flex; flex-wrap: wrap; gap: 0.2rem 1rem;
+}
+.toc li { margin: 0; }
+.article .toc a { color: var(--fg-muted); text-decoration: none; }
+.toc a::before { content: "#"; color: var(--accent-2); opacity: 0.8; margin-right: 0.2em; }
+.article .toc a:hover { color: var(--accent); text-decoration: none; }
+.toc a.is-reading { color: var(--fg); }
+.toc a.is-reading::before { color: var(--accent); opacity: 1; }
+@media (min-width: 86rem) {
+  .toc {
+    position: fixed;
+    top: 5.5rem;
+    left: calc(50% - var(--frame) / 2 - 12.5rem);
+    width: 11rem;
+    margin: 0;
+    padding-left: 0.9rem;
+    border-left: 1px solid var(--border-soft);
+  }
+  .toc ol { display: grid; gap: 0.35rem; }
+  .toc a { display: block; text-wrap: pretty; }
+}
+
 .breadcrumb {
   font-family: var(--mono);
   font-size: var(--fs-mono-sm);
@@ -893,6 +1102,16 @@ footer {
   line-height: 1.6;
 }
 footer p { margin-bottom: 0.45rem; }
+.motion {
+  font: inherit;
+  color: var(--fg-faint);
+  background: none;
+  border: 1px solid var(--border-soft);
+  border-radius: 6px;
+  padding: 0.2rem 0.6rem;
+  cursor: pointer;
+}
+.motion:hover { color: var(--accent); border-color: var(--accent); }
 
 /* ---- print: a clean CV ------------------------------------------------ */
 
@@ -918,9 +1137,12 @@ footer p { margin-bottom: 0.45rem; }
      colophon about how the page is built — none of which belongs on a document
      someone prints to read on a train. Everything a CV is actually for stays. */
   .topnav, .cta, .anchor, .card-links, .updated, .section-note, .portrait,
-  #voices, .quotes, #faq, .qa, #contact, #colophon, ul.colophon, .collaborators {
+  #voices, .quotes, #faq, .qa, #contact, #colophon, ul.colophon, .collaborators,
+  .progress, .toc, .motion, .gl-pop {
     display: none;
   }
+  .gl { text-decoration: none; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
 
   .hero { display: grid; grid-template-columns: minmax(0, 1fr) 15rem; margin-top: 0; }
   .at-a-glance { display: block; }
