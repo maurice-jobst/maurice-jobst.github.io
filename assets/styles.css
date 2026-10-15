@@ -47,25 +47,29 @@
   --fs-base: 1.0625rem;      /* 17px: body                                     */
   --fs-lead: 1.1875rem;      /* 19px: the answer block                         */
 
-  /* ---- Catppuccin Latte, light ---------------------------------------- */
-  --bg: #eff1f5;             /* base                                          */
-  --bg-soft: #e6e9ef;        /* mantle                                        */
-  --bg-raised: #ffffff;
-  --fg: #4c4f69;             /* text          7.06 on base                    */
-  --fg-muted: #5c5f77;       /* subtext1      5.53                            */
-  --fg-faint: #63667c;       /* between subtext0 and subtext1, 4.85           */
-  --accent: #1a53c4;         /* blue darkened from #1e66f5 (4.34) to 6.03     */
-  --accent-2: #4557c4;       /* lavender darkened from #7287fd (2.81) to 5.85 */
-  --accent-3: #a83f05;       /* peach darkened from #fe640b (2.64) to 5.30    */
+  /* ---- palette: light-dark(Latte, Mocha) ----------------------------- */
+  /* color-scheme above picks the side from the OS setting. Comments: the
+     Catppuccin name, then the contrast on that scheme's base, light / dark. */
+  --bg:          light-dark(#eff1f5, #1e1e2e);  /* base                        */
+  --bg-soft:     light-dark(#e6e9ef, #181825);  /* mantle                      */
+  --bg-raised:   light-dark(#ffffff, #232336);  /* dark: between base, surface0 */
+  --fg:          light-dark(#4c4f69, #cdd6f4);  /* text        7.06 / 11.34    */
+  --fg-muted:    light-dark(#5c5f77, #a6adc8);  /* subtext1/0  5.53 / 7.37     */
+  --fg-faint:    light-dark(#63667c, #9399b2);  /* light: between subtext0 and
+                                                   subtext1; overlay2 4.85 / 5.81 */
+  /* Latte's accents darkened until they pass, Mocha's as published */
+  --accent:      light-dark(#1a53c4, #89b4fa);  /* blue, #1e66f5 was 4.34; 6.03 / 7.79      */
+  --accent-2:    light-dark(#4557c4, #b4befe);  /* lavender, #7287fd was 2.81; 5.85 / 9.17  */
+  --accent-3:    light-dark(#a83f05, #fab387);  /* peach, #fe640b was 2.64; 5.30 / 9.27     */
   /* green, darkened from Latte's #40a02b (2.96) far enough to clear AA on the
      soft background too — it labels the outcome block inside a secondary card,
      which is the darkest surface it lands on */
-  --ok: #245f13;             /* 5.41 on base, 5.03 on soft                    */
-  --accent-soft: rgba(26, 83, 196, 0.08);
-  --accent-2-soft: rgba(69, 87, 196, 0.10);
-  --on-accent: #ffffff;      /* 6.82 on --accent                              */
-  --border: #bcc0cc;         /* surface1                                      */
-  --border-soft: #ccd0da;    /* surface0                                      */
+  --ok:          light-dark(#245f13, #a6e3a1);  /* 5.41 (5.03 on soft) / 11.03 */
+  --accent-soft:   light-dark(rgba(26, 83, 196, 0.08), rgba(137, 180, 250, 0.13));
+  --accent-2-soft: light-dark(rgba(69, 87, 196, 0.10), rgba(180, 190, 254, 0.12));
+  --on-accent:   light-dark(#ffffff, #1e1e2e);  /* on --accent 6.82 / 7.79     */
+  --border:      light-dark(#bcc0cc, #45475a);  /* surface1                    */
+  --border-soft: light-dark(#ccd0da, #313244);  /* surface0                    */
   --shadow-card: 0 1px 2px rgba(76, 79, 105, 0.06);
   --shadow-card-hover: 0 3px 14px rgba(26, 83, 196, 0.13);
 
@@ -74,24 +78,10 @@
   --pad: 1.25rem;
 }
 
-/* ---- Catppuccin Mocha, dark ------------------------------------------- */
+/* ---- dark shadows ---------------------------------------------------- */
+/* light-dark() takes colours only, so the two shadows keep a media query. */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #1e1e2e;           /* base                                          */
-    --bg-soft: #181825;      /* mantle                                        */
-    --bg-raised: #232336;    /* between base and surface0                     */
-    --fg: #cdd6f4;           /* text         11.34 on base                    */
-    --fg-muted: #a6adc8;     /* subtext0      7.37                            */
-    --fg-faint: #9399b2;     /* overlay2      5.81                            */
-    --accent: #89b4fa;       /* blue          7.79                            */
-    --accent-2: #b4befe;     /* lavender      9.17                            */
-    --accent-3: #fab387;     /* peach         9.27                            */
-    --ok: #a6e3a1;           /* green        11.03                            */
-    --accent-soft: rgba(137, 180, 250, 0.13);
-    --accent-2-soft: rgba(180, 190, 254, 0.12);
-    --on-accent: #1e1e2e;    /* 7.79 on --accent                              */
-    --border: #45475a;       /* surface1                                      */
-    --border-soft: #313244;  /* surface0                                      */
     --shadow-card: none;
     --shadow-card-hover: 0 3px 16px rgba(137, 180, 250, 0.14);
   }
@@ -1018,7 +1008,7 @@ em { color: var(--fg-muted); }
   display: flex; flex-wrap: wrap; gap: 0.2rem 1rem;
 }
 .toc li { margin: 0; }
-.article .toc a { color: var(--fg-muted); text-decoration: none; }
+.article .toc a { color: var(--fg-muted); text-decoration: none; transition: color 0.15s ease; }
 .toc a::before { content: "#"; color: var(--accent-2); opacity: 0.8; margin-right: 0.2em; }
 .article .toc a:hover { color: var(--accent); text-decoration: none; }
 .toc a.is-reading { color: var(--fg); }
@@ -1035,6 +1025,13 @@ em { color: var(--fg-muted); }
   }
   .toc ol { display: grid; gap: 0.35rem; }
   .toc a { display: block; text-wrap: pretty; }
+}
+/* entry: the gutter list settles in beside the article instead of being there
+   before the page is; the inline list on a narrow screen is part of the flow
+   and does not move */
+@media (min-width: 86rem) {
+  .toc { opacity: 1; translate: 0 0; transition: opacity 0.3s ease 0.1s, translate 0.3s ease 0.1s; }
+  @starting-style { .toc { opacity: 0; translate: -6px 0; } }
 }
 
 .breadcrumb {
@@ -1110,13 +1107,18 @@ footer p { margin-bottom: 0.45rem; }
   border-radius: 6px;
   padding: 0.2rem 0.6rem;
   cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, opacity 0.2s ease;
 }
 .motion:hover { color: var(--accent); border-color: var(--accent); }
+/* entry: the script unhides the switch after first paint; it fades in rather
+   than popping into a footer the reader may already be looking at */
+@starting-style { .motion:not([hidden]) { opacity: 0; } }
 
 /* ---- print: a clean CV ------------------------------------------------ */
 
 @media print {
   :root {
+    color-scheme: light;
     --bg: #fff; --bg-soft: #fff; --bg-raised: #fff;
     --fg: #000; --fg-muted: #333; --fg-faint: #555;
     --accent: #000; --accent-2: #000; --accent-3: #000; --ok: #000;
