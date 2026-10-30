@@ -925,8 +925,7 @@ em { color: var(--fg-muted); }
 
 /* ---- glossary --------------------------------------------------------- */
 
-/* The estate's glossary grammar (aurelius ADR 2026-09-25 §3, shared with
-   shop.home and money.home): the first use of a term on a page is a button
+/* The glossary grammar shared across the sites: the first use of a term on a page is a button
    around a <dfn>, the explanation a [popover] span beside it. Click or tap
    opens, Escape or a click outside closes. Here the popover is anchored under
    the term (CSS anchor positioning, Baseline September 2026) and flips above
